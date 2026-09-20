@@ -57,7 +57,7 @@ export default function Projects() {
         {/* Section heading */}
         <div className="mb-12">
           <p className="font-mono text-sm text-green-400">
-            05 / PROJECTS
+            04 / PROJECTS
           </p>
 
           <h2 className="mt-3 text-3xl font-bold text-white sm:text-4xl">
