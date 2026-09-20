@@ -62,7 +62,7 @@ const projects = [
     title: "Student Management System",
     description:
       "A student management project currently under development for managing student-related information through a web application.",
-    technologies: ["HTML", "In Progress"],
+    technologies: ["Java", "Spring Boot","Rest APIs", "In Progress"],
     github:
       "https://github.com/Bhuvi285/Student-management-system",
     live: "",
