@@ -1,7 +1,9 @@
 export default function Navbar() {
   return (
     <nav>
-      <div>BN.</div>
+      <div>
+        <a href="#home">BN.</a>
+      </div>
 
       <div>
         <a href="#home">Home</a>
