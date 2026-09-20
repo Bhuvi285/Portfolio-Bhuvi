@@ -23,9 +23,9 @@ const skillGroups = [
     skills: [
       "React",
       "Next.js",
-      "Angular",
       "HTML",
       "CSS",
+      "Bootstrap",
       "Tailwind CSS",
     ],
   },
