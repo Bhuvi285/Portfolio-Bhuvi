@@ -15,3 +15,11 @@ section {
   padding: 80px 40px;
   border-bottom: 1px solid #262626;
 }
+
+html {
+  scroll-behavior: smooth;
+}
+
+section {
+  scroll-margin-top: 100px;
+}
