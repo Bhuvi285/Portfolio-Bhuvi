@@ -51,7 +51,7 @@ const projects = [
     title: "Contact Manager App",
     description:
       "A contact management application built to practice application structure, data handling and CRUD-based functionality.",
-    technologies: ["JavaScript"],
+    technologies: ["JavaScript" , "React", "Next.js"],
     github:
       "https://github.com/Bhuvi285/Contact-Manager-App",
     live: "",

@@ -27,7 +27,7 @@ export default function Education() {
         {/* Section heading */}
         <div className="mb-12">
           <p className="font-mono text-sm text-green-400">
-            05 / EDUCATION
+            0 / EDUCATION
           </p>
 
           <h2 className="mt-3 text-3xl font-bold text-white sm:text-4xl">
