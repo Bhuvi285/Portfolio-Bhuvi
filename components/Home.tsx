@@ -65,8 +65,8 @@ export default function Home() {
                 "Java",
                 "Spring Boot",
                 "React",
-                "Angular",
-                "PostgreSQL",
+                "Next.js",
+                "MySQL",
               ].map((technology) => (
                 <span
                   key={technology}
