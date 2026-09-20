@@ -9,7 +9,7 @@ const projects = [
     title: "ChitChat — The Live Chat App",
     description:
       "A live chat application focused on building real-time communication functionality with a modern web interface.",
-    technologies: ["JavaScript"],
+    technologies: ["JavaScript" , "React.js", "Node.js/Express.js", "Socket.io"],
     github:
       "https://github.com/Bhuvi285/ChitChat-The_Live_Chat_App",
     live: "https://chit-chat-the-live-chat-app.vercel.app",
