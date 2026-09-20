@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <section id="Footer">
+    <section id="footer">
       <h1>Footer</h1>
     </section>
   );
