@@ -23,11 +23,11 @@ const education = [
 export default function Education() {
   return (
     <section id="education" className="px-6 py-24">
-      <div className="mx-auto max-w-5xl">
+      <div className="mx-auto max-w-7xl">
         {/* Section heading */}
         <div className="mb-12">
           <p className="font-mono text-sm text-green-400">
-            04 / EDUCATION
+            05 / EDUCATION
           </p>
 
           <h2 className="mt-3 text-3xl font-bold text-white sm:text-4xl">
