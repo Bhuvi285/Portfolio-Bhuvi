@@ -118,9 +118,11 @@ export default function Home() {
                   <br />
                   React
                   <br />
-                  Angular
+                  Next.js
                   <br />
-                  PostgreSQL
+                  MySQL
+                  <br />
+                  MongoDB
                 </div>
 
                 <div>
