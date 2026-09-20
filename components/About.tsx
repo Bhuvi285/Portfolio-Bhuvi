@@ -26,12 +26,12 @@ export default function About() {
     <section id="about" className="px-6 py-24">
       <div className="mx-auto max-w-7xl">
         {/* Section Header */}
-        <div className="mb-12">
+        <div className="mb-12 ">
           <p className="font-mono text-sm text-green-400">
             01 / ABOUT ME
           </p>
 
-          <h2 className="mt-1 text-3xl font-bold text-white sm:text-4xl">
+          <h2 className="mt-3 text-3xl font-bold text-white sm:text-4xl">
             A little about me.
           </h2>
         </div>
