@@ -6,45 +6,89 @@ import {
 
 const projects = [
   {
-    title: "E-Commerce Platform",
+    title: "ChitChat — The Live Chat App",
     description:
-      "A full-stack e-commerce application with user authentication, product management, shopping cart functionality and order management.",
-    technologies: [
-      "Java",
-      "Spring Boot",
-      "React",
-      "PostgreSQL",
-    ],
-    github: "https://github.com/yourusername/ecommerce",
-    live: "https://your-project.vercel.app",
+      "A live chat application focused on building real-time communication functionality with a modern web interface.",
+    technologies: ["JavaScript"],
+    github:
+      "https://github.com/Bhuvi285/ChitChat-The_Live_Chat_App",
+    live: "https://chit-chat-the-live-chat-app.vercel.app",
+    status: "completed",
     featured: true,
   },
   {
-    title: "Task Management Application",
+    title: "Auth MERN App",
     description:
-      "A full-stack task management application where users can create, update, organize and track their tasks.",
-    technologies: [
-      "MongoDB",
-      "Express.js",
-      "React",
-      "Node.js",
-    ],
-    github: "https://github.com/yourusername/task-manager",
-    live: "https://your-task-manager.vercel.app",
+      "A MERN stack authentication application focused on implementing user authentication and a full-stack web application workflow.",
+    technologies: ["MongoDB", "Express.js", "React", "Node.js"],
+    github: "https://github.com/Bhuvi285/auth-mern-app",
+    live: "https://auth-mern-app-ui-five.vercel.app/",
+    status: "completed",
+    featured: true,
+  },
+  {
+    title: "FleetBridge",
+    description:
+      "A full-stack project currently under development, focused on building a practical application while improving full-stack development skills.",
+    technologies: ["In Progress"],
+    github: "https://github.com/Bhuvi285/FleetBridge",
+    live: "",
+    status: "in-progress",
+    featured: true,
+  },
+  {
+    title: "RAG Support Assistant",
+    description:
+      "An experimental support assistant project exploring Retrieval-Augmented Generation and AI-powered question answering.",
+    technologies: ["Python", "RAG", "AI"],
+    github:
+      "https://github.com/Bhuvi285/RAG-support-assistant",
+    live: "",
+    status: "completed",
+    featured: false,
+  },
+  {
+    title: "Contact Manager App",
+    description:
+      "A contact management application built to practice application structure, data handling and CRUD-based functionality.",
+    technologies: ["JavaScript"],
+    github:
+      "https://github.com/Bhuvi285/Contact-Manager-App",
+    live: "",
+    status: "completed",
     featured: false,
   },
   {
     title: "Student Management System",
     description:
-      "A web application for managing student records with CRUD operations, REST APIs and database integration.",
-    technologies: [
-      "Java",
-      "Spring Boot",
-      "MySQL",
-      "REST API",
-    ],
-    github: "https://github.com/yourusername/student-management",
+      "A student management project currently under development for managing student-related information through a web application.",
+    technologies: ["HTML", "In Progress"],
+    github:
+      "https://github.com/Bhuvi285/Student-management-system",
     live: "",
+    status: "in-progress",
+    featured: false,
+  },
+  {
+    title: "Interview Preparation App",
+    description:
+      "A project currently under development focused on creating an application to support interview preparation and technical learning.",
+    technologies: ["In Progress"],
+    github:
+      "https://github.com/Bhuvi285/Interview-preparation-App",
+    live: "",
+    status: "in-progress",
+    featured: false,
+  },
+  {
+    title: "To-Do List",
+    description:
+      "A React-based task management application created to practice component-based UI development and application state handling.",
+    technologies: ["React", "JavaScript"],
+    github:
+      "https://github.com/Bhuvi285/To-Do-List-with-React-JS",
+    live: "",
+    status: "completed",
     featured: false,
   },
 ];
@@ -57,16 +101,17 @@ export default function Projects() {
         {/* Section heading */}
         <div className="mb-12">
           <p className="font-mono text-sm text-green-400">
-            04 / PROJECTS
+            05 / PROJECTS
           </p>
 
           <h2 className="mt-3 text-3xl font-bold text-white sm:text-4xl">
-            Things I’ve built.
+            Things I&apos;ve built.
           </h2>
 
           <p className="mt-4 max-w-2xl text-zinc-500">
-            A selection of projects where I have applied my development
-            skills to solve practical problems.
+            A collection of projects I&apos;ve built while learning and
+            applying full-stack development, React and modern web
+            technologies.
           </p>
         </div>
 
@@ -81,8 +126,8 @@ export default function Projects() {
                   : "border-zinc-800"
               } hover:border-zinc-700`}
             >
-              {/* Project header */}
-              <div className="flex items-start justify-between">
+              {/* Header */}
+              <div className="flex items-start justify-between gap-4">
                 <div className="flex h-11 w-11 items-center justify-center rounded-lg border border-zinc-800 bg-zinc-900">
                   <Layers
                     size={20}
@@ -90,14 +135,22 @@ export default function Projects() {
                   />
                 </div>
 
-                {project.featured && (
-                  <span className="rounded-full border border-green-900/60 bg-green-950/30 px-3 py-1 font-mono text-xs text-green-400">
-                    Featured
-                  </span>
-                )}
+                <div className="flex flex-wrap justify-end gap-2">
+                  {project.featured && (
+                    <span className="rounded-full border border-green-900/60 bg-green-950/30 px-3 py-1 font-mono text-xs text-green-400">
+                      Featured
+                    </span>
+                  )}
+
+                  {project.status === "in-progress" && (
+                    <span className="rounded-full border border-yellow-900/60 bg-yellow-950/30 px-3 py-1 font-mono text-xs text-yellow-400">
+                      In Progress
+                    </span>
+                  )}
+                </div>
               </div>
 
-              {/* Project information */}
+              {/* Project content */}
               <div className="mt-6 flex-1">
                 <h3 className="text-xl font-semibold text-white">
                   {project.title}
@@ -120,7 +173,7 @@ export default function Projects() {
                 </div>
               </div>
 
-              {/* Project links */}
+              {/* Links */}
               <div className="mt-6 flex items-center gap-4 border-t border-zinc-800 pt-5">
                 <a
                   href={project.github}
