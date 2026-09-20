@@ -31,7 +31,7 @@ export default function About() {
             01 / ABOUT ME
           </p>
 
-          <h2 className="mt-3 text-3xl font-bold text-white sm:text-4xl">
+          <h2 className="mt-1 text-3xl font-bold text-white sm:text-4xl">
             A little about me.
           </h2>
         </div>
@@ -48,7 +48,7 @@ export default function About() {
 
             <p className="mt-5 text-lg leading-8 text-zinc-400">
               My primary focus is Java and Spring Boot for backend
-              development, combined with React and Angular for building
+              development, combined with React and Next.js for building
               modern user interfaces.
             </p>
 
