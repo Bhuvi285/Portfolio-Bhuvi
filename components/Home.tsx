@@ -31,7 +31,7 @@ export default function Home() {
           {/* Description */}
           <p className="mt-6 max-w-2xl text-base leading-7 text-zinc-400 sm:text-lg">
             I build modern and scalable web applications using
-            Java, Spring Boot, React, Angular and related
+            Java, Spring Boot, React and MongoDB, Express, Node.js
             technologies.
           </p>
 
