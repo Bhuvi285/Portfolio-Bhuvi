@@ -1,13 +1,19 @@
 import Image from "next/image";
-import { ArrowDown, ArrowRight, Code2, Terminal } from "lucide-react";
+import {
+  ArrowDown,
+  ArrowRight,
+  Code2,
+  Github,
+  Terminal,
+} from "lucide-react";
 
 export default function Home() {
   return (
     <section
       id="home"
-      className="flex min-h-[calc(100vh-73px)] items-center overflow-hidden px-6 py-20"
+      className="relative flex min-h-[calc(100vh-73px)] items-center overflow-hidden px-6 py-20"
     >
-      <div className="mx-auto grid w-full max-w-7xl items-center gap-14 lg:grid-cols-[1.05fr_0.95fr]">
+      <div className="mx-auto grid w-full max-w-7xl items-center gap-16 lg:grid-cols-[1.05fr_0.95fr]">
         {/* =========================
             LEFT CONTENT
         ========================== */}
@@ -40,7 +46,7 @@ export default function Home() {
           <div className="mt-8 flex flex-wrap gap-4">
             <a
               href="#projects"
-              className="inline-flex items-center gap-2 rounded-lg bg-green-400 px-5 py-3 text-sm font-semibold text-black transition-transform hover:-translate-y-0.5 hover:bg-green-300"
+              className="inline-flex items-center gap-2 rounded-lg bg-green-400 px-5 py-3 text-sm font-semibold text-black transition-all hover:-translate-y-0.5 hover:bg-green-300"
             >
               View Projects
               <ArrowRight size={17} />
@@ -71,7 +77,7 @@ export default function Home() {
               ].map((technology) => (
                 <span
                   key={technology}
-                  className="rounded-md border border-zinc-800 px-3 py-1.5 font-mono text-xs text-zinc-400 transition-colors hover:border-zinc-700 hover:text-green-400"
+                  className="rounded-md border border-zinc-800 px-3 py-1.5 font-mono text-xs text-zinc-400 transition-colors hover:border-green-900 hover:text-green-400"
                 >
                   {technology}
                 </span>
@@ -81,84 +87,179 @@ export default function Home() {
         </div>
 
         {/* =========================
-            RIGHT IMAGE
+            RIGHT DEVELOPER FRAME
         ========================== */}
         <div className="relative mx-auto w-full max-w-xl">
-          {/* Background glow */}
-          <div className="absolute -inset-8 rounded-full bg-green-500/10 blur-3xl" />
+          {/* Green ambient glow */}
+          <div className="absolute left-1/2 top-1/2 h-72 w-72 -translate-x-1/2 -translate-y-1/2 rounded-full bg-green-500/10 blur-[100px]" />
 
-          {/* Decorative dots */}
-          <div className="absolute -right-3 -top-5 z-10 grid grid-cols-6 gap-2 opacity-40">
-            {Array.from({ length: 36 }).map((_, index) => (
-              <span
-                key={index}
-                className="h-1 w-1 rounded-full bg-green-400"
-              />
-            ))}
-          </div>
+          {/* Decorative background circles */}
+          <div className="absolute -right-12 top-10 h-40 w-40 rounded-full border border-green-400/10" />
 
-          {/* Main image */}
-          <div className="relative overflow-hidden rounded-2xl border border-zinc-700 bg-zinc-950 shadow-2xl shadow-black/50">
-            <Image
-              src="/portfolio-hero.png"
-              alt="Bhuvanesh - Full Stack Java Developer"
-              width={1000}
-              height={1000}
-              priority
-              className="h-auto w-full object-cover"
-            />
-
-            {/* Bottom gradient */}
-            <div className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-zinc-950/70 to-transparent" />
-
-            {/* Subtle green border glow */}
-            <div className="pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-green-400/10" />
-          </div>
+          <div className="absolute -bottom-12 -left-12 h-48 w-48 rounded-full border border-zinc-800/50" />
 
           {/* =========================
-              FLOATING CARD - LEFT
+              CODE EDITOR WINDOW
           ========================== */}
-          <div className="absolute -bottom-5 -left-5 z-20 hidden rounded-xl border border-zinc-700 bg-zinc-950/95 p-4 shadow-xl backdrop-blur-md sm:block">
-            <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg border border-green-900/60 bg-green-950/40">
-                <Code2 size={19} className="text-green-400" />
+          <div className="relative rounded-2xl border border-zinc-800 bg-zinc-950/95 p-3 shadow-2xl shadow-black/50">
+            {/* Window Header */}
+            <div className="flex items-center justify-between border-b border-zinc-800 px-3 pb-3">
+              <div className="flex items-center gap-2">
+                <span className="h-2.5 w-2.5 rounded-full bg-zinc-700" />
+                <span className="h-2.5 w-2.5 rounded-full bg-zinc-700" />
+                <span className="h-2.5 w-2.5 rounded-full bg-zinc-700" />
               </div>
 
-              <div>
-                <p className="font-mono text-xs text-zinc-600">
-                  currently
+              <div className="flex items-center gap-2 font-mono text-[11px] text-zinc-600">
+                <Code2 size={13} />
+                developer.ts
+              </div>
+
+              <div className="w-12" />
+            </div>
+
+            {/* Main Editor */}
+            <div className="relative min-h-[470px] overflow-hidden rounded-xl bg-[#0d0d0d]">
+              {/* Code behind image */}
+              <div className="absolute left-5 top-7 hidden font-mono text-xs leading-6 text-zinc-600 sm:block">
+                <p>
+                  <span className="text-green-500">const</span>{" "}
+                  developer =
                 </p>
 
-                <p className="text-sm font-medium text-white">
-                  Building & Learning
+                <p className="pl-4">{"{"}</p>
+
+                <p className="pl-8">
+                  name:{" "}
+                  <span className="text-green-400">
+                    &quot;Bhuvanesh&quot;
+                  </span>
+                  ,
                 </p>
+
+                <p className="pl-8">
+                  role:{" "}
+                  <span className="text-green-400">
+                    &quot;Full Stack Developer&quot;
+                  </span>
+                  ,
+                </p>
+
+                <p className="pl-8">
+                  passion:{" "}
+                  <span className="text-green-400">
+                    &quot;Building&quot;
+                  </span>
+                  ,
+                </p>
+
+                <p className="pl-8">
+                  learning:{" "}
+                  <span className="text-green-400">
+                    true
+                  </span>
+                  ,
+                </p>
+
+                <p className="pl-4">{"}"}</p>
+
+                <p className="mt-5">
+                  <span className="text-green-500">function</span>{" "}
+                  <span className="text-zinc-300">
+                    build
+                  </span>
+                  () {"{"}
+                </p>
+
+                <p className="pl-4 text-zinc-700">
+                  return &quot;ideas → applications&quot;;
+                </p>
+
+                <p>{"}"}</p>
+              </div>
+
+              {/* =========================
+                  PORTRAIT
+              ========================== */}
+              <div className="absolute bottom-0 right-[-15px] top-8 w-[72%] sm:right-[-25px] sm:w-[68%]">
+                {/* Image glow */}
+                <div className="absolute inset-5 rounded-full bg-green-400/10 blur-3xl" />
+
+                <Image
+                  src="/portfolio-hero.png"
+                  alt="Bhuvanesh - Full Stack Java Developer"
+                  fill
+                  priority
+                  sizes="(max-width: 768px) 80vw, 450px"
+                  className="relative object-cover object-center"
+                />
+
+                {/* Image fade into background */}
+                <div className="absolute inset-0 bg-gradient-to-r from-[#0d0d0d] via-transparent to-transparent" />
+
+                <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#0d0d0d] to-transparent" />
+              </div>
+
+              {/* Line numbers */}
+              <div className="absolute bottom-6 left-4 hidden font-mono text-[10px] leading-6 text-zinc-800 sm:block">
+                01
+                <br />
+                02
+                <br />
+                03
+                <br />
+                04
+                <br />
+                05
+                <br />
+                06
+                <br />
+                07
+                <br />
+                08
+                <br />
+                09
+              </div>
+
+              {/* Terminal status */}
+              <div className="absolute bottom-5 left-12 z-20 hidden items-center gap-2 rounded-lg border border-zinc-800 bg-zinc-950/90 px-3 py-2 backdrop-blur sm:flex">
+                <Terminal size={14} className="text-green-400" />
+
+                <span className="font-mono text-[11px] text-zinc-400">
+                  building...
+                </span>
+
+                <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-green-400" />
               </div>
             </div>
           </div>
 
           {/* =========================
-              FLOATING CARD - RIGHT
+              FLOATING TECH BADGE
           ========================== */}
-          <div className="absolute -right-5 top-10 z-20 hidden rounded-xl border border-zinc-700 bg-zinc-950/95 p-4 shadow-xl backdrop-blur-md md:block">
+          <div className="absolute -bottom-6 -right-4 z-30 rounded-xl border border-zinc-700 bg-zinc-950 px-4 py-3 shadow-xl shadow-black/40">
             <div className="flex items-center gap-3">
-              <div className="flex h-9 w-9 items-center justify-center rounded-lg border border-zinc-800 bg-zinc-900">
-                <Terminal size={17} className="text-green-400" />
+              <div className="flex h-9 w-9 items-center justify-center rounded-lg border border-green-900/50 bg-green-950/30">
+                <Github
+                  size={17}
+                  className="text-green-400"
+                />
               </div>
 
-              <div className="font-mono text-xs">
-                <p className="text-zinc-600">
+              <div>
+                <p className="font-mono text-[10px] text-zinc-600">
                   stack
                 </p>
 
-                <p className="text-zinc-300">
+                <p className="text-xs font-medium text-zinc-200">
                   Java · Spring · React
                 </p>
               </div>
             </div>
           </div>
 
-          {/* Decorative circle */}
-          <div className="absolute -bottom-10 -right-10 -z-10 h-32 w-32 rounded-full border border-green-400/10" />
+          {/* Corner accent */}
+          <div className="absolute -left-3 top-16 h-16 w-1 rounded-full bg-green-400/60" />
         </div>
       </div>
     </section>
