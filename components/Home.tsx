@@ -3,7 +3,6 @@ import {
   ArrowDown,
   ArrowRight,
   Code2,
-  Github,
   Terminal,
 } from "lucide-react";
 
@@ -240,7 +239,7 @@ export default function Home() {
           <div className="absolute -bottom-6 -right-4 z-30 rounded-xl border border-zinc-700 bg-zinc-950 px-4 py-3 shadow-xl shadow-black/40">
             <div className="flex items-center gap-3">
               <div className="flex h-9 w-9 items-center justify-center rounded-lg border border-green-900/50 bg-green-950/30">
-                <Github
+                <Code2
                   size={17}
                   className="text-green-400"
                 />
