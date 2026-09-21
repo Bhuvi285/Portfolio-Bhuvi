@@ -14,8 +14,8 @@ const contactLinks = [
   },
   {
     label: "LinkedIn",
-    value: "linkedin.com/in/your-profile",
-    href: "https://www.linkedin.com/in/your-profile",
+    value: "linkedin.com/in/bhuvaneshneve",
+    href: "https://www.linkedin.com/in/bhuvaneshneve",
     icon: Link,
   },
   {
