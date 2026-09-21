@@ -8,8 +8,8 @@ import {
 const contactLinks = [
   {
     label: "Email",
-    value: "your-email@example.com",
-    href: "mailto:your-email@example.com",
+    value: "bhuvineve05@gmail.com",
+    href: "mailto:bhuvineve05@gmail.com",
     icon: Mail,
   },
   {
