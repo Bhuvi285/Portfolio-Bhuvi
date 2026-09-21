@@ -1,5 +1,5 @@
-import Image from "next/image";
 import Navbar from "@/components/Navbar";
+import InteractiveBackground from "@/components/InteractiveBackground";
 import Home from "@/components/Home";
 import About from "@/components/About";
 import Skills from "@/components/Skills";
@@ -17,17 +17,21 @@ export default function Page() {
     <>
       <Navbar />
 
-      <main>
-        <Home />
-        <About />
-        <Skills />
-        <Experience />
-        <Projects />
-        <Education />
-        <Certifications />
-        <Resume />
-        <GitHub />
-        <Contact />
+      <main className="relative">
+        <InteractiveBackground />
+
+        <div className="relative z-10">
+          <Home />
+          <About />
+          <Skills />
+          <Experience />
+          <Projects />
+          <Education />
+          <Certifications />
+          <Resume />
+          <GitHub />
+          <Contact />
+        </div>
       </main>
 
       <Footer />
