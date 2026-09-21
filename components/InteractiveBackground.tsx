@@ -1,23 +1,20 @@
 "use client";
 
-import { motion, useMotionValue, useSpring } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+
+type Point = {
+  x: number;
+  y: number;
+};
 
 export default function InteractiveBackground() {
   const [isTouchDevice, setIsTouchDevice] = useState(false);
+  const [path, setPath] = useState("");
 
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-
-  const smoothX = useSpring(mouseX, {
-    stiffness: 50,
-    damping: 20,
-  });
-
-  const smoothY = useSpring(mouseY, {
-    stiffness: 50,
-    damping: 20,
-  });
+  const pointsRef = useRef<Point[]>([]);
+  const animationFrameRef = useRef<number | null>(null);
+  const targetRef = useRef<Point>({ x: 0, y: 0 });
+  const currentRef = useRef<Point>({ x: 0, y: 0 });
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(pointer: coarse)");
@@ -39,11 +36,10 @@ export default function InteractiveBackground() {
     if (isTouchDevice) return;
 
     const handleMouseMove = (event: MouseEvent) => {
-      const x = (event.clientX / window.innerWidth - 0.5) * 2;
-      const y = (event.clientY / window.innerHeight - 0.5) * 2;
-
-      mouseX.set(x);
-      mouseY.set(y);
+      targetRef.current = {
+        x: event.clientX,
+        y: event.clientY,
+      };
     };
 
     window.addEventListener("mousemove", handleMouseMove);
@@ -51,59 +47,147 @@ export default function InteractiveBackground() {
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
     };
-  }, [isTouchDevice, mouseX, mouseY]);
+  }, [isTouchDevice]);
+
+  useEffect(() => {
+    if (isTouchDevice) return;
+
+    const animate = () => {
+      const target = targetRef.current;
+      const current = currentRef.current;
+
+      // Smoothly follow the cursor
+      current.x += (target.x - current.x) * 0.12;
+      current.y += (target.y - current.y) * 0.12;
+
+      pointsRef.current.push({
+        x: current.x,
+        y: current.y,
+      });
+
+      // Keep only the latest points
+      if (pointsRef.current.length > 35) {
+        pointsRef.current.shift();
+      }
+
+      // Build SVG path
+      if (pointsRef.current.length > 2) {
+        const points = pointsRef.current;
+
+        let pathData = `M ${points[0].x} ${points[0].y}`;
+
+        for (let i = 1; i < points.length; i++) {
+          const previous = points[i - 1];
+          const currentPoint = points[i];
+
+          const controlX = (previous.x + currentPoint.x) / 2;
+          const controlY = (previous.y + currentPoint.y) / 2;
+
+          pathData += ` Q ${previous.x} ${previous.y} ${controlX} ${controlY}`;
+        }
+
+        const last = points[points.length - 1];
+
+        pathData += ` L ${last.x} ${last.y}`;
+
+        setPath(pathData);
+      }
+
+      animationFrameRef.current =
+        requestAnimationFrame(animate);
+    };
+
+    animationFrameRef.current =
+      requestAnimationFrame(animate);
+
+    return () => {
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
+      }
+    };
+  }, [isTouchDevice]);
+
+  if (isTouchDevice) {
+    return null;
+  }
 
   return (
-    <div
+    <svg
       aria-hidden="true"
-      className="pointer-events-none fixed inset-0 -z-10 overflow-hidden"
+      className="pointer-events-none fixed inset-0 z-0 h-full w-full"
+      style={{
+        overflow: "visible",
+      }}
     >
-      {/* Base SVG */}
-      <svg
-        className="absolute h-full w-full opacity-40"
-        viewBox="0 0 1440 1200"
-        preserveAspectRatio="none"
-        fill="none"
-      >
-        <motion.path
-          d="M-100 250 C 200 50, 350 450, 650 250 S 1100 50, 1540 300"
-          stroke="rgba(74, 222, 128, 0.12)"
-          strokeWidth="1"
-          style={{
-            x: isTouchDevice ? 0 : smoothX,
-            y: isTouchDevice ? 0 : smoothY,
-          }}
-        />
+      <defs>
+        <linearGradient
+          id="cursorTrailGradient"
+          x1="0%"
+          y1="0%"
+          x2="100%"
+          y2="0%"
+        >
+          <stop
+            offset="0%"
+            stopColor="#4ade80"
+            stopOpacity="0"
+          />
 
-        <motion.path
-          d="M-150 650 C 200 400, 450 850, 800 600 S 1200 400, 1550 700"
-          stroke="rgba(161, 161, 170, 0.10)"
-          strokeWidth="1"
-          style={{
-            x: isTouchDevice ? 0 : smoothX,
-            y: isTouchDevice ? 0 : smoothY,
-          }}
-        />
+          <stop
+            offset="70%"
+            stopColor="#4ade80"
+            stopOpacity="0.12"
+          />
 
-        <motion.path
-          d="M-100 1050 C 250 800, 450 1150, 750 950 S 1200 800, 1550 1050"
-          stroke="rgba(74, 222, 128, 0.08)"
-          strokeWidth="1"
-          style={{
-            x: isTouchDevice ? 0 : smoothX,
-            y: isTouchDevice ? 0 : smoothY,
-          }}
-        />
-      </svg>
+          <stop
+            offset="100%"
+            stopColor="#4ade80"
+            stopOpacity="0.75"
+          />
+        </linearGradient>
 
-      {/* Subtle moving glow */}
-      <motion.div
-        className="absolute left-1/2 top-1/3 h-96 w-96 -translate-x-1/2 -translate-y-1/2 rounded-full bg-green-400/[0.025] blur-3xl"
-        style={{
-          x: isTouchDevice ? 0 : smoothX,
-          y: isTouchDevice ? 0 : smoothY,
-        }}
-      />
-    </div>
+        <filter
+          id="cursorTrailGlow"
+          x="-50%"
+          y="-50%"
+          width="200%"
+          height="200%"
+        >
+          <feGaussianBlur
+            stdDeviation="3"
+            result="blur"
+          />
+
+          <feMerge>
+            <feMergeNode in="blur" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
+      </defs>
+
+      {path && (
+        <>
+          {/* Soft glow */}
+          <path
+            d={path}
+            fill="none"
+            stroke="#4ade80"
+            strokeWidth="5"
+            strokeLinecap="round"
+            opacity="0.08"
+            filter="url(#cursorTrailGlow)"
+          />
+
+          {/* Main trail */}
+          <path
+            d={path}
+            fill="none"
+            stroke="url(#cursorTrailGradient)"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+          />
+        </>
+      )}
+    </svg>
   );
 }
