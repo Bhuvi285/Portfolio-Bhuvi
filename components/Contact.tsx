@@ -1,3 +1,6 @@
+"use client";
+
+import { motion } from "framer-motion";
 import {
   Code2,
   Link,
@@ -26,13 +29,33 @@ const contactLinks = [
   },
 ];
 
+const contactItemVariants = {
+  hidden: {
+    opacity: 0,
+    x: 25,
+  },
+  visible: {
+    opacity: 1,
+    x: 0,
+  },
+};
+
 export default function Contact() {
   return (
     <section id="contact" className="px-6 py-24">
       <div className="mx-auto max-w-7xl">
 
         {/* Section heading */}
-        <div className="mb-12">
+        <motion.div
+          initial={{ opacity: 0, y: 25 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{
+            duration: 0.6,
+            ease: "easeOut" as const,
+          }}
+          className="mb-12"
+        >
           <p className="font-mono text-sm text-green-400">
             09 / CONTACT
           </p>
@@ -46,12 +69,21 @@ export default function Contact() {
             Java/Spring Boot and MERN development. Feel free to reach out
             if you&apos;d like to connect.
           </p>
-        </div>
+        </motion.div>
 
         <div className="grid gap-6 lg:grid-cols-2">
 
           {/* Contact message */}
-          <div className="rounded-xl border border-zinc-800 bg-zinc-950 p-8">
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{
+              duration: 0.6,
+              ease: "easeOut" as const,
+            }}
+            className="rounded-xl border border-zinc-800 bg-zinc-950 p-8"
+          >
             <div className="flex h-12 w-12 items-center justify-center rounded-lg border border-zinc-800 bg-zinc-900">
               <Mail
                 size={22}
@@ -76,16 +108,27 @@ export default function Contact() {
               <Mail size={17} />
               Send Me an Email
             </a>
-          </div>
+          </motion.div>
 
           {/* Contact links */}
-          <div className="space-y-4">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ staggerChildren: 0.15 }}
+            className="space-y-4"
+          >
             {contactLinks.map((contact) => {
               const Icon = contact.icon;
 
               return (
-                <a
+                <motion.a
                   key={contact.label}
+                  variants={contactItemVariants}
+                  transition={{
+                    duration: 0.5,
+                    ease: "easeOut" as const,
+                  }}
                   href={contact.href}
                   target={
                     contact.label === "Email"
@@ -115,11 +158,19 @@ export default function Contact() {
                       {contact.value}
                     </p>
                   </div>
-                </a>
+                </motion.a>
               );
             })}
 
-            <div className="flex items-center gap-4 rounded-xl border border-zinc-800 bg-zinc-950 p-5">
+            {/* Location */}
+            <motion.div
+              variants={contactItemVariants}
+              transition={{
+                duration: 0.5,
+                ease: "easeOut" as const,
+              }}
+              className="flex items-center gap-4 rounded-xl border border-zinc-800 bg-zinc-950 p-5"
+            >
               <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-zinc-800 bg-zinc-900">
                 <MapPin
                   size={18}
@@ -136,8 +187,8 @@ export default function Contact() {
                   Pune, India
                 </p>
               </div>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
       </div>
     </section>
