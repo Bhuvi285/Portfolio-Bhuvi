@@ -1,5 +1,5 @@
 import {
-  Github,
+  Code2,
   Linkedin,
   Mail,
   MapPin,
@@ -22,7 +22,7 @@ const contactLinks = [
     label: "GitHub",
     value: "github.com/Bhuvi285",
     href: "https://github.com/Bhuvi285",
-    icon: Github,
+    icon: Code2,
   },
 ];
 
