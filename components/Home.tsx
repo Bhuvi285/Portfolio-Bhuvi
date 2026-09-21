@@ -1,5 +1,5 @@
-import { ArrowDown, ArrowRight } from "lucide-react";
-
+import Image from "next/image";
+import { ArrowDown, ArrowRight, Code2, Terminal } from "lucide-react";
 export default function Home() {
   return (
     <section
