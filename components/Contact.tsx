@@ -1,6 +1,6 @@
 import {
   Code2,
-  Linkedin,
+  Link,
   Mail,
   MapPin,
 } from "lucide-react";
@@ -16,7 +16,7 @@ const contactLinks = [
     label: "LinkedIn",
     value: "linkedin.com/in/your-profile",
     href: "https://www.linkedin.com/in/your-profile",
-    icon: Linkedin,
+    icon: Link,
   },
   {
     label: "GitHub",
