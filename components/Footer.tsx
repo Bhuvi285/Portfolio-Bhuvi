@@ -1,6 +1,7 @@
+"use client";
+
 import {
   ArrowUp,
-  Linkedin,
   Mail,
 } from "lucide-react";
 
@@ -51,7 +52,15 @@ export default function Footer() {
               aria-label="LinkedIn"
               className="flex h-10 w-10 items-center justify-center rounded-lg border border-zinc-800 text-zinc-400 transition-colors hover:border-zinc-700 hover:text-white"
             >
-              <Linkedin size={18} />
+              <svg
+                viewBox="0 0 24 24"
+                width="18"
+                height="18"
+                fill="currentColor"
+                aria-hidden="true"
+              >
+                <path d="M5.2 3.5a2.2 2.2 0 1 1 0 4.4 2.2 2.2 0 0 1 0-4.4ZM3.3 9.2h3.8v11.3H3.3V9.2Zm6.2 0h3.6v1.5h.1c.5-.9 1.7-1.9 3.6-1.9 3.8 0 4.5 2.5 4.5 5.8v5.9h-3.8v-5.2c0-1.2 0-2.8-1.7-2.8s-2 1.3-2 2.7v5.3H9.5V9.2Z" />
+              </svg>
             </a>
 
             <a
