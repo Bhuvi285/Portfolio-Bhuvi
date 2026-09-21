@@ -1,3 +1,6 @@
+"use client";
+
+import { motion } from "framer-motion";
 import { Code2, GraduationCap, Target } from "lucide-react";
 
 const highlights = [
@@ -21,12 +24,30 @@ const highlights = [
   },
 ];
 
+const cardVariants = {
+  hidden: {
+    opacity: 0,
+    y: 25,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+  },
+};
+
 export default function About() {
   return (
     <section id="about" className="px-6 py-24">
       <div className="mx-auto max-w-7xl">
+
         {/* Section Header */}
-        <div className="mb-12 ">
+        <motion.div
+          initial={{ opacity: 0, y: 25 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.6 }}
+          className="mb-12"
+        >
           <p className="font-mono text-sm text-green-400">
             01 / ABOUT ME
           </p>
@@ -34,14 +55,20 @@ export default function About() {
           <h2 className="mt-3 text-3xl font-bold text-white sm:text-4xl">
             A little about me.
           </h2>
-        </div>
+        </motion.div>
 
         {/* Main Content */}
         <div className="grid gap-12 lg:grid-cols-2">
+
           {/* Introduction */}
-          <div>
+          <motion.div
+            initial={{ opacity: 0, x: -25 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.6 }}
+          >
             <p className="text-lg leading-8 text-zinc-400">
-              I'm a Computer Engineering student and aspiring Full Stack
+              I&apos;m a Computer Engineering student and aspiring Full Stack
               Java Developer who enjoys building modern web applications
               and solving real-world problems through code.
             </p>
@@ -56,16 +83,24 @@ export default function About() {
               I enjoy learning new technologies, working on practical
               projects and continuously improving my development skills.
             </p>
-          </div>
+          </motion.div>
 
           {/* Highlights */}
-          <div className="space-y-4">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ staggerChildren: 0.15 }}
+            className="space-y-4"
+          >
             {highlights.map((item) => {
               const Icon = item.icon;
 
               return (
-                <div
+                <motion.div
                   key={item.title}
+                  variants={cardVariants}
+                  transition={{ duration: 0.5, ease: "easeOut" }}
                   className="group rounded-xl border border-zinc-800 bg-zinc-950 p-5 transition-colors hover:border-zinc-700"
                 >
                   <div className="flex gap-4">
@@ -86,10 +121,11 @@ export default function About() {
                       </p>
                     </div>
                   </div>
-                </div>
+                </motion.div>
               );
             })}
-          </div>
+          </motion.div>
+
         </div>
       </div>
     </section>

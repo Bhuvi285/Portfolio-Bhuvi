@@ -1,3 +1,6 @@
+"use client";
+
+import { motion } from "framer-motion";
 import {
   Braces,
   Database,
@@ -63,6 +66,17 @@ const skillGroups = [
   },
 ];
 
+const cardVariants = {
+  hidden: {
+    opacity: 0,
+    y: 25,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+  },
+};
+
 export default function Skills() {
   return (
     <section id="skills" className="px-6 py-24">
@@ -84,13 +98,21 @@ export default function Skills() {
         </div>
 
         {/* Skill Groups */}
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ staggerChildren: 0.15 }}
+          className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
+        >
           {skillGroups.map((group) => {
             const Icon = group.icon;
 
             return (
-              <div
+              <motion.div
                 key={group.title}
+                variants={cardVariants}
+                transition={{ duration: 0.5, ease: "easeOut" }}
                 className="rounded-xl border border-zinc-800 bg-zinc-950 p-6 transition-colors hover:border-zinc-700"
               >
                 {/* Group Header */}
@@ -118,10 +140,10 @@ export default function Skills() {
                     </span>
                   ))}
                 </div>
-              </div>
+              </motion.div>
             );
           })}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

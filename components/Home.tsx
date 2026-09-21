@@ -1,6 +1,7 @@
 "use client";
-import { motion } from "framer-motion";
+
 import Image from "next/image";
+import { motion } from "framer-motion";
 import {
   ArrowDown,
   ArrowRight,
@@ -9,11 +10,25 @@ import {
 } from "lucide-react";
 
 const containerVariants = {
-  hidden: { opacity: 0 },
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.12,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: {
+    opacity: 0,
+    y: 20,
+  },
   visible: {
     opacity: 1,
+    y: 0,
     transition: {
-      staggerChildren: 0.1,
+      duration: 0.5,
+      ease: "easeOut" as const,
     },
   },
 };
@@ -34,31 +49,42 @@ export default function Home() {
           animate="visible"
         >
           {/* Status */}
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-zinc-800 bg-zinc-900/50 px-3 py-1.5 font-mono text-xs text-zinc-400">
+          <motion.div
+            variants={itemVariants}
+            className="mb-6 inline-flex items-center gap-2 rounded-full border border-zinc-800 bg-zinc-900/50 px-3 py-1.5 font-mono text-xs text-zinc-400"
+          >
             <span className="h-2 w-2 animate-pulse rounded-full bg-green-400" />
             Available for opportunities
-          </div>
+          </motion.div>
 
           {/* Heading */}
-          <h1 className="max-w-4xl text-5xl font-bold leading-tight tracking-tight text-white sm:text-6xl lg:text-7xl">
+          <motion.h1
+            variants={itemVariants}
+            className="max-w-4xl text-5xl font-bold leading-tight tracking-tight text-white sm:text-6xl lg:text-7xl">
             Hi, I&apos;m{" "}
             <span className="text-green-400">
               Bhuvanesh.
             </span>
-          </h1>
+          </motion.h1>
 
-          <h2 className="mt-4 max-w-3xl text-2xl font-semibold text-zinc-300 sm:text-3xl">
+          <motion.h2
+            variants={itemVariants}
+            className="mt-4 max-w-3xl text-2xl font-semibold text-zinc-300 sm:text-3xl">
             Full Stack Java Developer.
-          </h2>
+          </motion.h2>
 
           {/* Description */}
-          <p className="mt-6 max-w-2xl text-base leading-7 text-zinc-400 sm:text-lg">
+          <motion.p
+            variants={itemVariants}
+            className="mt-6 max-w-2xl text-base leading-7 text-zinc-400 sm:text-lg">
             I build modern and scalable web applications using
             Java, Spring Boot, React and MERN technologies.
-          </p>
+          </motion.p>
 
           {/* Actions */}
-          <div className="mt-8 flex flex-wrap gap-4">
+          <motion.div
+            variants={itemVariants}
+            className="mt-8 flex flex-wrap gap-4">
             <a
               href="#projects"
               className="inline-flex items-center gap-2 rounded-lg bg-green-400 px-5 py-3 text-sm font-semibold text-black transition-all hover:-translate-y-0.5 hover:bg-green-300"
@@ -74,10 +100,12 @@ export default function Home() {
               Download Resume
               <ArrowDown size={17} />
             </a>
-          </div>
+          </motion.div>
 
           {/* Tech Stack */}
-          <div className="mt-10">
+          <motion.div
+            variants={itemVariants}
+            className="mt-10">
             <p className="mb-3 font-mono text-xs uppercase tracking-widest text-zinc-600">
               Currently working with
             </p>
@@ -98,7 +126,7 @@ export default function Home() {
                 </span>
               ))}
             </div>
-          </div>
+          </motion.div>
         </motion.div>
 
         {/* =========================

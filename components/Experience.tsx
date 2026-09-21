@@ -1,3 +1,6 @@
+"use client";
+
+import { motion } from "framer-motion";
 import { Briefcase, Code2, MapPin, Target } from "lucide-react";
 
 const opportunities = [
@@ -24,12 +27,29 @@ const opportunities = [
   },
 ];
 
+const cardVariants = {
+  hidden: {
+    opacity: 0,
+    y: 25,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+  },
+};
+
 export default function Experience() {
   return (
     <section id="experience" className="px-6 py-24">
       <div className="mx-auto max-w-7xl">
         {/* Section heading */}
-        <div className="mb-12">
+        <motion.div
+          initial={{ opacity: 0, y: 25 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.6, ease: "easeOut" as const }}
+          className="mb-12"
+        >
           <p className="font-mono text-sm text-green-400">
             03 / EXPERIENCE
           </p>
@@ -43,10 +63,16 @@ export default function Experience() {
             apply my skills, contribute to real-world projects and grow as a
             developer.
           </p>
-        </div>
+        </motion.div>
 
         {/* Availability */}
-        <div className="mb-8 flex items-center gap-3 rounded-xl border border-green-900/50 bg-green-950/20 p-4">
+        <motion.div
+          initial={{ opacity: 0, x: -25 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.6, ease: "easeOut" as const }}
+          className="mb-8 flex items-center gap-3 rounded-xl border border-green-900/50 bg-green-950/20 p-4"
+        >
           <div className="flex h-10 w-10 items-center justify-center rounded-lg border border-green-900 bg-green-950">
             <MapPin size={18} className="text-green-400" />
           </div>
@@ -60,16 +86,27 @@ export default function Experience() {
               Java / Spring Boot and MERN Stack
             </p>
           </div>
-        </div>
+        </motion.div>
 
         {/* Opportunity cards */}
-        <div className="grid gap-4 md:grid-cols-3">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ staggerChildren: 0.15 }}
+          className="grid gap-4 md:grid-cols-3"
+        >
           {opportunities.map((opportunity) => {
             const Icon = opportunity.icon;
 
             return (
-              <div
+              <motion.div
                 key={opportunity.title}
+                variants={cardVariants}
+                transition={{
+                  duration: 0.5,
+                  ease: "easeOut" as const,
+                }}
                 className="rounded-xl border border-zinc-800 bg-zinc-950 p-6 transition-colors hover:border-zinc-700"
               >
                 <div className="flex h-10 w-10 items-center justify-center rounded-lg border border-zinc-800 bg-zinc-900">
@@ -94,10 +131,10 @@ export default function Experience() {
                     </span>
                   ))}
                 </div>
-              </div>
+              </motion.div>
             );
           })}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

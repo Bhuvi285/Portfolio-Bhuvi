@@ -1,3 +1,6 @@
+"use client";
+
+import { motion } from "framer-motion";
 import { Calendar, GraduationCap } from "lucide-react";
 
 const education = [
@@ -20,14 +23,34 @@ const education = [
   },
 ];
 
+const cardVariants = {
+  hidden: {
+    opacity: 0,
+    y: 25,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+  },
+};
+
 export default function Education() {
   return (
     <section id="education" className="px-6 py-24">
       <div className="mx-auto max-w-7xl">
         {/* Section heading */}
-        <div className="mb-12">
+        <motion.div
+          initial={{ opacity: 0, y: 25 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{
+            duration: 0.6,
+            ease: "easeOut" as const,
+          }}
+          className="mb-12"
+        >
           <p className="font-mono text-sm text-green-400">
-            0 / EDUCATION
+            04 / EDUCATION
           </p>
 
           <h2 className="mt-3 text-3xl font-bold text-white sm:text-4xl">
@@ -38,17 +61,28 @@ export default function Education() {
             My educational background and the foundation behind my
             development journey.
           </p>
-        </div>
+        </motion.div>
 
         {/* Education timeline */}
         <div className="relative">
           {/* Timeline line */}
           <div className="absolute left-5 top-0 hidden h-full w-px bg-zinc-800 sm:block" />
 
-          <div className="space-y-10">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ staggerChildren: 0.2 }}
+            className="space-y-10"
+          >
             {education.map((item) => (
-              <div
+              <motion.div
                 key={`${item.institution}-${item.degree}`}
+                variants={cardVariants}
+                transition={{
+                  duration: 0.5,
+                  ease: "easeOut" as const,
+                }}
                 className="relative sm:pl-14"
               >
                 {/* Timeline icon */}
@@ -94,12 +128,11 @@ export default function Education() {
                     {item.description}
                   </p>
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>
   );
 }
-
