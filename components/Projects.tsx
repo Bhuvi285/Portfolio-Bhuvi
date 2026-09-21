@@ -1,3 +1,6 @@
+"use client";
+
+import { motion } from "framer-motion";
 import {
   ExternalLink,
   GitBranch,
@@ -9,7 +12,12 @@ const projects = [
     title: "ChitChat — The Live Chat App",
     description:
       "A live chat application focused on building real-time communication functionality with a modern web interface.",
-    technologies: ["JavaScript" , "React.js", "Node.js/Express.js", "Socket.io"],
+    technologies: [
+      "JavaScript",
+      "React.js",
+      "Node.js/Express.js",
+      "Socket.io",
+    ],
     github:
       "https://github.com/Bhuvi285/ChitChat-The_Live_Chat_App",
     live: "https://chit-chat-the-live-chat-app.vercel.app",
@@ -51,7 +59,11 @@ const projects = [
     title: "Contact Manager App",
     description:
       "A contact management application built to practice application structure, data handling and CRUD-based functionality.",
-    technologies: ["JavaScript" , "React", "Next.js"],
+    technologies: [
+      "JavaScript",
+      "React",
+      "Next.js",
+    ],
     github:
       "https://github.com/Bhuvi285/Contact-Manager-App",
     live: "",
@@ -62,7 +74,12 @@ const projects = [
     title: "Student Management System",
     description:
       "A student management project currently under development for managing student-related information through a web application.",
-    technologies: ["Java", "Spring Boot","Rest APIs", "In Progress"],
+    technologies: [
+      "Java",
+      "Spring Boot",
+      "Rest APIs",
+      "In Progress",
+    ],
     github:
       "https://github.com/Bhuvi285/Student-management-system",
     live: "",
@@ -93,13 +110,33 @@ const projects = [
   },
 ];
 
+const cardVariants = {
+  hidden: {
+    opacity: 0,
+    y: 30,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+  },
+};
+
 export default function Projects() {
   return (
     <section id="projects" className="px-6 py-24">
       <div className="mx-auto max-w-7xl">
 
         {/* Section heading */}
-        <div className="mb-12">
+        <motion.div
+          initial={{ opacity: 0, y: 25 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{
+            duration: 0.6,
+            ease: "easeOut" as const,
+          }}
+          className="mb-12"
+        >
           <p className="font-mono text-sm text-green-400">
             05 / PROJECTS
           </p>
@@ -113,13 +150,24 @@ export default function Projects() {
             applying full-stack development, React and modern web
             technologies.
           </p>
-        </div>
+        </motion.div>
 
         {/* Project cards */}
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+          transition={{ staggerChildren: 0.12 }}
+          className="grid gap-6 md:grid-cols-2 lg:grid-cols-3"
+        >
           {projects.map((project) => (
-            <article
+            <motion.article
               key={project.title}
+              variants={cardVariants}
+              transition={{
+                duration: 0.5,
+                ease: "easeOut" as const,
+              }}
               className={`group flex h-full flex-col rounded-xl border bg-zinc-950 p-6 transition-colors ${
                 project.featured
                   ? "border-green-900/60"
@@ -197,9 +245,9 @@ export default function Projects() {
                   </a>
                 )}
               </div>
-            </article>
+            </motion.article>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
