@@ -5,6 +5,7 @@ import {
 
 const certifications = [
   {
+    id: "certification-2026",
     title: "Certification Name",
     organization: "Issuing Organization",
     date: "2026",
@@ -13,6 +14,7 @@ const certifications = [
     credentialUrl: "https://example.com",
   },
   {
+    id: "certification-2025-skills",
     title: "Certification Name",
     organization: "Issuing Organization",
     date: "2025",
@@ -21,6 +23,7 @@ const certifications = [
     credentialUrl: "https://example.com",
   },
   {
+    id: "certification-2025-knowledge",
     title: "Certification Name",
     organization: "Issuing Organization",
     date: "2025",
@@ -55,7 +58,7 @@ export default function Certifications() {
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {certifications.map((certification) => (
             <article
-              key={`${certification.title}-${certification.organization}`}
+              key={certification.id}
               className="group flex h-full flex-col rounded-xl border border-zinc-800 bg-zinc-950 p-6 transition-colors hover:border-zinc-700"
             >
               {/* Icon */}
