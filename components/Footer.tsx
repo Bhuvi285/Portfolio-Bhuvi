@@ -1,6 +1,6 @@
 import {
   ArrowUp,
-  LinkedinIcon,
+  Linkedin,
   Mail,
 } from "lucide-react";
 
@@ -51,7 +51,7 @@ export default function Footer() {
               aria-label="LinkedIn"
               className="flex h-10 w-10 items-center justify-center rounded-lg border border-zinc-800 text-zinc-400 transition-colors hover:border-zinc-700 hover:text-white"
             >
-              <LinkedinIcon size={18} />
+              <Linkedin size={18} />
             </a>
 
             <a
