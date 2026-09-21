@@ -94,7 +94,16 @@ export default function Home() {
         {/* =========================
             RIGHT DEVELOPER FRAME
         ========================== */}
-        <div className="relative mx-auto w-full max-w-xl">
+        <motion.div
+          initial={{ opacity: 0, x: 40, scale: 0.96 }}
+          animate={{ opacity: 1, x: 0, scale: 1 }}
+          transition={{
+            duration: 0.8,
+            delay: 0.2,
+            ease: "easeOut",
+          }}
+          className="relative mx-auto w-full max-w-xl"
+        >
           {/* Green ambient glow */}
           <div className="absolute left-1/2 top-1/2 h-72 w-72 -translate-x-1/2 -translate-y-1/2 rounded-full bg-green-500/10 blur-[100px]" />
 
@@ -265,7 +274,7 @@ export default function Home() {
 
           {/* Corner accent */}
           <div className="absolute -left-3 top-16 h-16 w-1 rounded-full bg-green-400/60" />
-        </div>
+        </motion.div>
       </div>
     </section>
   );
