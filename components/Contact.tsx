@@ -70,7 +70,7 @@ export default function Contact() {
             </p>
 
             <a
-              href="mailto:your-email@example.com"
+              href="mailto:bhuvineve05@gmail.com"
               className="mt-6 inline-flex items-center gap-2 rounded-lg bg-green-400 px-5 py-3 text-sm font-medium text-zinc-950 transition-colors hover:bg-green-300"
             >
               <Mail size={17} />
