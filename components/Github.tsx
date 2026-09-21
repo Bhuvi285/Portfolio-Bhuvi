@@ -1,3 +1,6 @@
+"use client";
+
+import { motion } from "framer-motion";
 import {
   ArrowUpRight,
   GitBranch,
@@ -22,13 +25,33 @@ const githubStats = [
   },
 ];
 
+const cardVariants = {
+  hidden: {
+    opacity: 0,
+    y: 25,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+  },
+};
+
 export default function GitHub() {
   return (
     <section id="github" className="px-6 py-24">
       <div className="mx-auto max-w-7xl">
 
         {/* Section heading */}
-        <div className="mb-12">
+        <motion.div
+          initial={{ opacity: 0, y: 25 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{
+            duration: 0.6,
+            ease: "easeOut" as const,
+          }}
+          className="mb-12"
+        >
           <p className="font-mono text-sm text-green-400">
             08 / GITHUB
           </p>
@@ -41,15 +64,24 @@ export default function GitHub() {
             I use GitHub to build projects, experiment with technologies
             and keep track of my development journey.
           </p>
-        </div>
+        </motion.div>
 
         {/* GitHub content */}
         <div className="grid gap-6 lg:grid-cols-[1.5fr_1fr]">
 
           {/* Main GitHub card */}
-          <div className="rounded-xl border border-zinc-800 bg-zinc-950 p-8">
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{
+              duration: 0.6,
+              ease: "easeOut" as const,
+            }}
+            className="rounded-xl border border-zinc-800 bg-zinc-950 p-8"
+          >
             <div className="flex flex-col gap-6 sm:flex-row sm:items-start sm:justify-between">
-              
+
               <div className="flex items-start gap-4">
                 <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg border border-zinc-800 bg-zinc-900">
                   <GitBranch
@@ -96,16 +128,27 @@ export default function GitHub() {
               Explore My Repositories
               <ArrowUpRight size={16} />
             </a>
-          </div>
+          </motion.div>
 
           {/* Stats */}
-          <div className="grid gap-4 sm:grid-cols-3 lg:grid-cols-1">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ staggerChildren: 0.15 }}
+            className="grid gap-4 sm:grid-cols-3 lg:grid-cols-1"
+          >
             {githubStats.map((stat) => {
               const Icon = stat.icon;
 
               return (
-                <div
+                <motion.div
                   key={stat.label}
+                  variants={cardVariants}
+                  transition={{
+                    duration: 0.5,
+                    ease: "easeOut" as const,
+                  }}
                   className="flex items-center gap-4 rounded-xl border border-zinc-800 bg-zinc-950 p-5"
                 >
                   <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-zinc-800 bg-zinc-900">
@@ -124,10 +167,10 @@ export default function GitHub() {
                       {stat.label}
                     </p>
                   </div>
-                </div>
+                </motion.div>
               );
             })}
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

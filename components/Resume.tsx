@@ -1,11 +1,23 @@
+"use client";
+
+import { motion } from "framer-motion";
 import { Download, FileText } from "lucide-react";
+
 export default function Resume() {
   return (
     <section id="resume" className="px-6 py-24">
       <div className="mx-auto max-w-7xl">
-        <div className="rounded-2xl border border-zinc-800 bg-zinc-950 p-8 sm:p-10">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{
+            duration: 0.6,
+            ease: "easeOut" as const,
+          }}
+          className="rounded-2xl border border-zinc-800 bg-zinc-950 p-8 sm:p-10"
+        >
           <div className="flex flex-col gap-8 md:flex-row md:items-center md:justify-between">
-
             {/* Resume information */}
             <div className="flex items-start gap-5">
               <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg border border-zinc-800 bg-zinc-900">
@@ -54,7 +66,7 @@ export default function Resume() {
               </a>
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

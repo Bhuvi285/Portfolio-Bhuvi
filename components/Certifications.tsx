@@ -1,3 +1,6 @@
+"use client";
+
+import { motion } from "framer-motion";
 import {
   Award,
   ExternalLink,
@@ -33,13 +36,33 @@ const certifications = [
   },
 ];
 
+const cardVariants = {
+  hidden: {
+    opacity: 0,
+    y: 30,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+  },
+};
+
 export default function Certifications() {
   return (
     <section id="certifications" className="px-6 py-24">
       <div className="mx-auto max-w-7xl">
 
         {/* Section heading */}
-        <div className="mb-12">
+        <motion.div
+          initial={{ opacity: 0, y: 25 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{
+            duration: 0.6,
+            ease: "easeOut" as const,
+          }}
+          className="mb-12"
+        >
           <p className="font-mono text-sm text-green-400">
             06 / CERTIFICATIONS
           </p>
@@ -52,13 +75,24 @@ export default function Certifications() {
             Certifications and learning achievements that complement
             my development skills.
           </p>
-        </div>
+        </motion.div>
 
         {/* Certification cards */}
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+          transition={{ staggerChildren: 0.15 }}
+          className="grid gap-6 md:grid-cols-2 lg:grid-cols-3"
+        >
           {certifications.map((certification) => (
-            <article
+            <motion.article
               key={certification.id}
+              variants={cardVariants}
+              transition={{
+                duration: 0.5,
+                ease: "easeOut" as const,
+              }}
               className="group flex h-full flex-col rounded-xl border border-zinc-800 bg-zinc-950 p-6 transition-colors hover:border-zinc-700"
             >
               {/* Icon */}
@@ -102,9 +136,9 @@ export default function Certifications() {
                   </a>
                 </div>
               )}
-            </article>
+            </motion.article>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
