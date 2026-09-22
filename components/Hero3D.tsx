@@ -1,38 +1,30 @@
 "use client";
 
 import { Canvas } from "@react-three/fiber";
-import { Float, OrbitControls } from "@react-three/drei";
-import * as THREE from "three";
+import { Float, OrbitControls, Text } from "@react-three/drei";
 
 const codeLines = [
-  { text: "const developer = {", color: "#f5f5f5", width: 1.9 },
-  { text: '  name: "Bhuvanesh",', color: "#4ade80", width: 2.2 },
-  { text: '  role: "Full Stack Developer",', color: "#60a5fa", width: 2.7 },
-  { text: '  stack: ["Java", "React"],', color: "#c084fc", width: 2.4 },
-  { text: "};", color: "#f5f5f5", width: 0.5 },
+  {
+    text: "const developer = {",
+    color: "#f5f5f5",
+  },
+  {
+    text: '  name: "Bhuvanesh",',
+    color: "#4ade80",
+  },
+  {
+    text: '  role: "Full Stack Developer",',
+    color: "#60a5fa",
+  },
+  {
+    text: '  stack: ["Java", "React"],',
+    color: "#c084fc",
+  },
+  {
+    text: "};",
+    color: "#f5f5f5",
+  },
 ];
-
-function CodeLine({
-  index,
-  width,
-  color,
-}: {
-  index: number;
-  width: number;
-  color: string;
-}) {
-  return (
-    <mesh position={[-0.65 + width / 2, 0.55 - index * 0.35, 0.15]}>
-      <planeGeometry args={[width, 0.08]} />
-
-      <meshBasicMaterial
-        color={new THREE.Color(color)}
-        transparent
-        opacity={0.9}
-      />
-    </mesh>
-  );
-}
 
 function CodeEditor() {
   return (
@@ -57,10 +49,7 @@ function CodeEditor() {
         <mesh position={[0, 1.05, 0.12]}>
           <boxGeometry args={[3.7, 0.35, 0.04]} />
 
-          <meshStandardMaterial
-            color="#27272a"
-            roughness={0.3}
-          />
+          <meshStandardMaterial color="#27272a" />
         </mesh>
 
         {/* Window buttons */}
@@ -81,12 +70,17 @@ function CodeEditor() {
 
         {/* Code */}
         {codeLines.map((line, index) => (
-          <CodeLine
+          <Text
             key={line.text}
-            index={index}
-            width={line.width}
+            position={[-1.35, 0.55 - index * 0.35, 0.16]}
+            fontSize={0.16}
             color={line.color}
-          />
+            anchorX="left"
+            anchorY="middle"
+            // font="/fonts/JetBrainsMono-Regular.woff2"
+          >
+            {line.text}
+          </Text>
         ))}
       </group>
     </Float>
