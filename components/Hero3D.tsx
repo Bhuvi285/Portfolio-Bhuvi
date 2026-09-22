@@ -71,16 +71,40 @@ function TechBadge({
 
     const time = state.clock.elapsedTime;
 
-    badgeRef.current.position.y =
-      position[1] + Math.sin(time * 1.2 + position[0]) * 0.08;
+    // Natural floating movement
+    const floatY =
+      position[1] +
+      Math.sin(time * 1.2 + position[0]) * 0.08;
 
-    badgeRef.current.rotation.z =
-      Math.sin(time * 0.8 + position[0]) * 0.04;
+    // Cursor parallax
+    const targetX =
+      position[0] + state.pointer.x * 0.12;
+
+    const targetY =
+      floatY + state.pointer.y * 0.08;
+
+    badgeRef.current.position.x = THREE.MathUtils.lerp(
+      badgeRef.current.position.x,
+      targetX,
+      0.04
+    );
+
+    badgeRef.current.position.y = THREE.MathUtils.lerp(
+      badgeRef.current.position.y,
+      targetY,
+      0.04
+    );
+
+    badgeRef.current.rotation.z = THREE.MathUtils.lerp(
+      badgeRef.current.rotation.z,
+      state.pointer.x * 0.03,
+      0.04
+    );
   });
 
   return (
     <group ref={badgeRef} position={position}>
-      {/* Badge background */}
+      {/* Badge body */}
       <mesh>
         <planeGeometry args={[1.05, 0.42]} />
 
@@ -93,7 +117,7 @@ function TechBadge({
         />
       </mesh>
 
-      {/* Badge border */}
+      {/* Accent layer */}
       <mesh position={[0, 0, 0.015]}>
         <planeGeometry args={[0.92, 0.3]} />
 
@@ -104,7 +128,7 @@ function TechBadge({
         />
       </mesh>
 
-      {/* Technology name */}
+      {/* Text */}
       <Text
         position={[0, 0, 0.03]}
         fontSize={0.13}
@@ -124,23 +148,26 @@ function CodeEditor() {
   useFrame((state) => {
     if (!groupRef.current) return;
 
-    const mouseX = state.pointer.x;
-    const mouseY = state.pointer.y;
+    // Stronger movement than the badges
+    const targetRotationY =
+      state.pointer.x * 0.35;
 
-    const targetRotationY = mouseX * 0.35;
-    const targetRotationX = -mouseY * 0.2;
+    const targetRotationX =
+      -state.pointer.y * 0.2;
 
-    groupRef.current.rotation.y = THREE.MathUtils.lerp(
-      groupRef.current.rotation.y,
-      targetRotationY,
-      0.05
-    );
+    groupRef.current.rotation.y =
+      THREE.MathUtils.lerp(
+        groupRef.current.rotation.y,
+        targetRotationY,
+        0.05
+      );
 
-    groupRef.current.rotation.x = THREE.MathUtils.lerp(
-      groupRef.current.rotation.x,
-      targetRotationX,
-      0.05
-    );
+    groupRef.current.rotation.x =
+      THREE.MathUtils.lerp(
+        groupRef.current.rotation.x,
+        targetRotationX,
+        0.05
+      );
   });
 
   return (
@@ -149,7 +176,10 @@ function CodeEditor() {
       rotationIntensity={0.08}
       floatIntensity={0.5}
     >
-      <group ref={groupRef} rotation={[0.05, -0.15, 0]}>
+      <group
+        ref={groupRef}
+        rotation={[0.05, -0.15, 0]}
+      >
         {/* Green glow */}
         <mesh position={[0, 0, -0.25]}>
           <planeGeometry args={[4.5, 3.2]} />
@@ -203,7 +233,7 @@ function CodeEditor() {
           </mesh>
         ))}
 
-        {/* Green status indicator */}
+        {/* Status light */}
         <mesh position={[1.55, 1.05, 0.18]}>
           <sphereGeometry args={[0.045, 16, 16]} />
 
@@ -218,7 +248,11 @@ function CodeEditor() {
         {codeLines.map((line, index) => (
           <Text
             key={line.text}
-            position={[-1.35, 0.55 - index * 0.35, 0.16]}
+            position={[
+              -1.35,
+              0.55 - index * 0.35,
+              0.16,
+            ]}
             fontSize={0.16}
             color={line.color}
             anchorX="left"
