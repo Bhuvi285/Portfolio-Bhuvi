@@ -95,6 +95,7 @@ function TechBadge({
       0.04
     );
 
+    // Small rotation based on cursor
     badgeRef.current.rotation.z = THREE.MathUtils.lerp(
       badgeRef.current.rotation.z,
       state.pointer.x * 0.03,
@@ -104,33 +105,31 @@ function TechBadge({
 
   return (
     <group ref={badgeRef} position={position}>
-      {/* Badge body */}
-      <mesh>
-        <planeGeometry args={[1.05, 0.42]} />
+      {/* 3D badge body */}
+      <mesh castShadow>
+        <boxGeometry args={[1.05, 0.42, 0.12]} />
 
         <meshStandardMaterial
           color="#18181b"
-          roughness={0.3}
-          metalness={0.5}
-          transparent
-          opacity={0.95}
+          roughness={0.25}
+          metalness={0.65}
         />
       </mesh>
 
-      {/* Accent layer */}
-      <mesh position={[0, 0, 0.015]}>
-        <planeGeometry args={[0.92, 0.3]} />
+      {/* Colored inner surface */}
+      <mesh position={[0, 0, 0.065]}>
+        <boxGeometry args={[0.92, 0.3, 0.015]} />
 
-        <meshBasicMaterial
-          color={color}
-          transparent
-          opacity={0.08}
+        <meshStandardMaterial
+          color="#09090b"
+          roughness={0.35}
+          metalness={0.3}
         />
       </mesh>
 
-      {/* Text */}
+      {/* Technology name */}
       <Text
-        position={[0, 0, 0.03]}
+        position={[0, 0, 0.085]}
         fontSize={0.13}
         color={color}
         anchorX="center"
@@ -138,6 +137,17 @@ function TechBadge({
       >
         {name}
       </Text>
+
+      {/* Small accent line */}
+      <mesh position={[0, -0.14, 0.085]}>
+        <boxGeometry args={[0.45, 0.015, 0.01]} />
+
+        <meshBasicMaterial
+          color={color}
+          transparent
+          opacity={0.7}
+        />
+      </mesh>
     </group>
   );
 }
@@ -148,26 +158,25 @@ function CodeEditor() {
   useFrame((state) => {
     if (!groupRef.current) return;
 
-    // Stronger movement than the badges
-    const targetRotationY =
-      state.pointer.x * 0.35;
+    const mouseX = state.pointer.x;
+    const mouseY = state.pointer.y;
 
-    const targetRotationX =
-      -state.pointer.y * 0.2;
+    // Target rotation based on cursor
+    const targetRotationY = mouseX * 0.35;
+    const targetRotationX = -mouseY * 0.2;
 
-    groupRef.current.rotation.y =
-      THREE.MathUtils.lerp(
-        groupRef.current.rotation.y,
-        targetRotationY,
-        0.05
-      );
+    // Smooth rotation
+    groupRef.current.rotation.y = THREE.MathUtils.lerp(
+      groupRef.current.rotation.y,
+      targetRotationY,
+      0.05
+    );
 
-    groupRef.current.rotation.x =
-      THREE.MathUtils.lerp(
-        groupRef.current.rotation.x,
-        targetRotationX,
-        0.05
-      );
+    groupRef.current.rotation.x = THREE.MathUtils.lerp(
+      groupRef.current.rotation.x,
+      targetRotationX,
+      0.05
+    );
   });
 
   return (
@@ -180,7 +189,7 @@ function CodeEditor() {
         ref={groupRef}
         rotation={[0.05, -0.15, 0]}
       >
-        {/* Green glow */}
+        {/* Green glow behind editor */}
         <mesh position={[0, 0, -0.25]}>
           <planeGeometry args={[4.5, 3.2]} />
 
@@ -191,7 +200,7 @@ function CodeEditor() {
           />
         </mesh>
 
-        {/* Main editor */}
+        {/* Main editor body */}
         <mesh castShadow>
           <boxGeometry args={[3.8, 2.5, 0.22]} />
 
@@ -202,7 +211,7 @@ function CodeEditor() {
           />
         </mesh>
 
-        {/* Screen */}
+        {/* Inner screen */}
         <mesh position={[0, -0.03, 0.125]}>
           <boxGeometry args={[3.55, 1.95, 0.025]} />
 
@@ -213,16 +222,23 @@ function CodeEditor() {
           />
         </mesh>
 
-        {/* Top bar */}
+        {/* Top editor bar */}
         <mesh position={[0, 1.05, 0.14]}>
           <boxGeometry args={[3.7, 0.35, 0.05]} />
 
-          <meshStandardMaterial color="#27272a" />
+          <meshStandardMaterial
+            color="#27272a"
+            roughness={0.25}
+            metalness={0.5}
+          />
         </mesh>
 
         {/* Window buttons */}
         {[-1.55, -1.35, -1.15].map((x) => (
-          <mesh key={x} position={[x, 1.05, 0.18]}>
+          <mesh
+            key={x}
+            position={[x, 1.05, 0.18]}
+          >
             <sphereGeometry args={[0.07, 16, 16]} />
 
             <meshStandardMaterial
@@ -233,7 +249,7 @@ function CodeEditor() {
           </mesh>
         ))}
 
-        {/* Status light */}
+        {/* Green status indicator */}
         <mesh position={[1.55, 1.05, 0.18]}>
           <sphereGeometry args={[0.045, 16, 16]} />
 
@@ -276,6 +292,7 @@ export default function Hero3D() {
         }}
         shadows
       >
+        {/* Scene lighting */}
         <ambientLight intensity={0.5} />
 
         <directionalLight
@@ -284,6 +301,7 @@ export default function Hero3D() {
           castShadow
         />
 
+        {/* Green light */}
         <pointLight
           position={[0, 0, 2]}
           color="#22c55e"
@@ -291,10 +309,13 @@ export default function Hero3D() {
           distance={6}
         />
 
+        {/* Environment lighting */}
         <Environment preset="city" />
 
+        {/* Main editor */}
         <CodeEditor />
 
+        {/* Floating technologies */}
         {technologies.map((technology) => (
           <TechBadge
             key={technology.name}
