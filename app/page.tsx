@@ -11,6 +11,7 @@ import Resume from "@/components/Resume";
 import GitHub from "@/components/Github";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
+import Hero3D from "@/components/Hero3D";
 
 export default function Page() {
   return (
@@ -21,6 +22,7 @@ export default function Page() {
         <InteractiveBackground />
 
         <div className="relative z-10">
+          <Hero3D />
           <Home />
           <About />
           <Skills />
