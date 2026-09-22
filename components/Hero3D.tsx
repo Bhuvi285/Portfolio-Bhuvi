@@ -71,12 +71,10 @@ function TechBadge({
 
     const time = state.clock.elapsedTime;
 
-    // Natural floating movement
     const floatY =
       position[1] +
       Math.sin(time * 1.2 + position[0]) * 0.08;
 
-    // Cursor parallax
     const targetX =
       position[0] + state.pointer.x * 0.12;
 
@@ -95,7 +93,6 @@ function TechBadge({
       0.04
     );
 
-    // Small rotation based on cursor
     badgeRef.current.rotation.z = THREE.MathUtils.lerp(
       badgeRef.current.rotation.z,
       state.pointer.x * 0.03,
@@ -105,7 +102,6 @@ function TechBadge({
 
   return (
     <group ref={badgeRef} position={position}>
-      {/* 3D badge body */}
       <mesh castShadow>
         <boxGeometry args={[1.05, 0.42, 0.12]} />
 
@@ -116,7 +112,6 @@ function TechBadge({
         />
       </mesh>
 
-      {/* Colored inner surface */}
       <mesh position={[0, 0, 0.065]}>
         <boxGeometry args={[0.92, 0.3, 0.015]} />
 
@@ -127,7 +122,6 @@ function TechBadge({
         />
       </mesh>
 
-      {/* Technology name */}
       <Text
         position={[0, 0, 0.085]}
         fontSize={0.13}
@@ -138,7 +132,6 @@ function TechBadge({
         {name}
       </Text>
 
-      {/* Small accent line */}
       <mesh position={[0, -0.14, 0.085]}>
         <boxGeometry args={[0.45, 0.015, 0.01]} />
 
@@ -158,25 +151,25 @@ function CodeEditor() {
   useFrame((state) => {
     if (!groupRef.current) return;
 
-    const mouseX = state.pointer.x;
-    const mouseY = state.pointer.y;
+    const targetRotationY =
+      state.pointer.x * 0.35;
 
-    // Target rotation based on cursor
-    const targetRotationY = mouseX * 0.35;
-    const targetRotationX = -mouseY * 0.2;
+    const targetRotationX =
+      -state.pointer.y * 0.2;
 
-    // Smooth rotation
-    groupRef.current.rotation.y = THREE.MathUtils.lerp(
-      groupRef.current.rotation.y,
-      targetRotationY,
-      0.05
-    );
+    groupRef.current.rotation.y =
+      THREE.MathUtils.lerp(
+        groupRef.current.rotation.y,
+        targetRotationY,
+        0.05
+      );
 
-    groupRef.current.rotation.x = THREE.MathUtils.lerp(
-      groupRef.current.rotation.x,
-      targetRotationX,
-      0.05
-    );
+    groupRef.current.rotation.x =
+      THREE.MathUtils.lerp(
+        groupRef.current.rotation.x,
+        targetRotationX,
+        0.05
+      );
   });
 
   return (
@@ -189,7 +182,7 @@ function CodeEditor() {
         ref={groupRef}
         rotation={[0.05, -0.15, 0]}
       >
-        {/* Green glow behind editor */}
+        {/* Green glow */}
         <mesh position={[0, 0, -0.25]}>
           <planeGeometry args={[4.5, 3.2]} />
 
@@ -200,7 +193,7 @@ function CodeEditor() {
           />
         </mesh>
 
-        {/* Main editor body */}
+        {/* Main editor */}
         <mesh castShadow>
           <boxGeometry args={[3.8, 2.5, 0.22]} />
 
@@ -211,7 +204,7 @@ function CodeEditor() {
           />
         </mesh>
 
-        {/* Inner screen */}
+        {/* Screen */}
         <mesh position={[0, -0.03, 0.125]}>
           <boxGeometry args={[3.55, 1.95, 0.025]} />
 
@@ -222,15 +215,11 @@ function CodeEditor() {
           />
         </mesh>
 
-        {/* Top editor bar */}
+        {/* Top bar */}
         <mesh position={[0, 1.05, 0.14]}>
           <boxGeometry args={[3.7, 0.35, 0.05]} />
 
-          <meshStandardMaterial
-            color="#27272a"
-            roughness={0.25}
-            metalness={0.5}
-          />
+          <meshStandardMaterial color="#27272a" />
         </mesh>
 
         {/* Window buttons */}
@@ -249,7 +238,7 @@ function CodeEditor() {
           </mesh>
         ))}
 
-        {/* Green status indicator */}
+        {/* Status light */}
         <mesh position={[1.55, 1.05, 0.18]}>
           <sphereGeometry args={[0.045, 16, 16]} />
 
@@ -282,6 +271,39 @@ function CodeEditor() {
   );
 }
 
+function FloatingPlatform() {
+  const platformRef = useRef<THREE.Mesh>(null);
+
+  useFrame((state) => {
+    if (!platformRef.current) return;
+
+    const time = state.clock.elapsedTime;
+
+    platformRef.current.rotation.z =
+      Math.sin(time * 0.4) * 0.015;
+
+    platformRef.current.position.y =
+      -1.65 + Math.sin(time * 0.7) * 0.025;
+  });
+
+  return (
+    <mesh
+      ref={platformRef}
+      position={[0, -1.65, -0.3]}
+      rotation={[-0.15, 0, 0]}
+      receiveShadow
+    >
+      <boxGeometry args={[4.8, 0.12, 2.2]} />
+
+      <meshStandardMaterial
+        color="#0f0f11"
+        roughness={0.35}
+        metalness={0.55}
+      />
+    </mesh>
+  );
+}
+
 export default function Hero3D() {
   return (
     <div className="h-[420px] w-full">
@@ -292,7 +314,7 @@ export default function Hero3D() {
         }}
         shadows
       >
-        {/* Scene lighting */}
+        {/* Lighting */}
         <ambientLight intensity={0.5} />
 
         <directionalLight
@@ -301,7 +323,6 @@ export default function Hero3D() {
           castShadow
         />
 
-        {/* Green light */}
         <pointLight
           position={[0, 0, 2]}
           color="#22c55e"
@@ -309,13 +330,11 @@ export default function Hero3D() {
           distance={6}
         />
 
-        {/* Environment lighting */}
         <Environment preset="city" />
 
-        {/* Main editor */}
+        {/* Main objects */}
         <CodeEditor />
 
-        {/* Floating technologies */}
         {technologies.map((technology) => (
           <TechBadge
             key={technology.name}
@@ -324,6 +343,8 @@ export default function Hero3D() {
             color={technology.color}
           />
         ))}
+
+        <FloatingPlatform />
       </Canvas>
     </div>
   );
