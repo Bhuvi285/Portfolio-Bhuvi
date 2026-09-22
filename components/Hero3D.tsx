@@ -1,12 +1,13 @@
 "use client";
 
-import { Canvas } from "@react-three/fiber";
+import { Canvas, useFrame } from "@react-three/fiber";
 import {
-  Float,
-  OrbitControls,
-  Text,
   Environment,
+  Float,
+  Text,
 } from "@react-three/drei";
+import { useRef } from "react";
+import * as THREE from "three";
 
 const codeLines = [
   {
@@ -32,13 +33,37 @@ const codeLines = [
 ];
 
 function CodeEditor() {
+  const groupRef = useRef<THREE.Group>(null);
+
+  useFrame((state) => {
+    if (!groupRef.current) return;
+
+    const mouseX = state.pointer.x;
+    const mouseY = state.pointer.y;
+
+    const targetRotationY = mouseX * 0.35;
+    const targetRotationX = -mouseY * 0.2;
+
+    groupRef.current.rotation.y = THREE.MathUtils.lerp(
+      groupRef.current.rotation.y,
+      targetRotationY,
+      0.05
+    );
+
+    groupRef.current.rotation.x = THREE.MathUtils.lerp(
+      groupRef.current.rotation.x,
+      targetRotationX,
+      0.05
+    );
+  });
+
   return (
     <Float
       speed={1.5}
-      rotationIntensity={0.2}
+      rotationIntensity={0.08}
       floatIntensity={0.5}
     >
-      <group rotation={[0.05, -0.15, 0]}>
+      <group ref={groupRef} rotation={[0.05, -0.15, 0]}>
         {/* Green glow behind the editor */}
         <mesh position={[0, 0, -0.25]}>
           <planeGeometry args={[4.5, 3.2]} />
@@ -51,7 +76,7 @@ function CodeEditor() {
         </mesh>
 
         {/* Main editor body */}
-        <mesh>
+        <mesh castShadow>
           <boxGeometry args={[3.8, 2.5, 0.22]} />
 
           <meshStandardMaterial
@@ -171,13 +196,6 @@ export default function Hero3D() {
         <Environment preset="city" />
 
         <CodeEditor />
-
-        <OrbitControls
-          enableZoom={false}
-          enablePan={false}
-          autoRotate
-          autoRotateSpeed={0.35}
-        />
       </Canvas>
     </div>
   );
