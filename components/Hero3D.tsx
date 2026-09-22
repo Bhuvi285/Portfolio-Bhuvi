@@ -10,15 +10,47 @@ function CodeEditor() {
       rotationIntensity={0.25}
       floatIntensity={0.5}
     >
-      <mesh rotation={[0.05, -0.15, 0]}>
-        <boxGeometry args={[3.8, 2.5, 0.18]} />
+      <group rotation={[0.05, -0.15, 0]}>
+        {/* Main editor body */}
+        <mesh>
+          <boxGeometry args={[3.8, 2.5, 0.18]} />
 
-        <meshStandardMaterial
-          color="#18181b"
-          roughness={0.35}
-          metalness={0.4}
-        />
-      </mesh>
+          <meshStandardMaterial
+            color="#18181b"
+            roughness={0.35}
+            metalness={0.4}
+          />
+        </mesh>
+
+        {/* Top bar */}
+        <mesh position={[0, 1.05, 0.12]}>
+          <boxGeometry args={[3.7, 0.35, 0.04]} />
+
+          <meshStandardMaterial
+            color="#27272a"
+            roughness={0.3}
+          />
+        </mesh>
+
+        {/* Window buttons */}
+        <mesh position={[-1.55, 1.05, 0.15]}>
+          <sphereGeometry args={[0.07, 16, 16]} />
+
+          <meshStandardMaterial color="#52525b" />
+        </mesh>
+
+        <mesh position={[-1.35, 1.05, 0.15]}>
+          <sphereGeometry args={[0.07, 16, 16]} />
+
+          <meshStandardMaterial color="#52525b" />
+        </mesh>
+
+        <mesh position={[-1.15, 1.05, 0.15]}>
+          <sphereGeometry args={[0.07, 16, 16]} />
+
+          <meshStandardMaterial color="#52525b" />
+        </mesh>
+      </group>
     </Float>
   );
 }
