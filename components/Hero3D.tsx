@@ -32,6 +32,92 @@ const codeLines = [
   },
 ];
 
+const technologies = [
+  {
+    name: "Java",
+    position: [-2.2, 1.2, 0] as [number, number, number],
+    color: "#f97316",
+  },
+  {
+    name: "Spring",
+    position: [2.1, 1.1, 0] as [number, number, number],
+    color: "#4ade80",
+  },
+  {
+    name: "React",
+    position: [-2.3, -1.1, 0] as [number, number, number],
+    color: "#60a5fa",
+  },
+  {
+    name: "Next.js",
+    position: [2.2, -1.1, 0] as [number, number, number],
+    color: "#f5f5f5",
+  },
+];
+
+function TechBadge({
+  name,
+  position,
+  color,
+}: {
+  name: string;
+  position: [number, number, number];
+  color: string;
+}) {
+  const badgeRef = useRef<THREE.Group>(null);
+
+  useFrame((state) => {
+    if (!badgeRef.current) return;
+
+    const time = state.clock.elapsedTime;
+
+    badgeRef.current.position.y =
+      position[1] + Math.sin(time * 1.2 + position[0]) * 0.08;
+
+    badgeRef.current.rotation.z =
+      Math.sin(time * 0.8 + position[0]) * 0.04;
+  });
+
+  return (
+    <group ref={badgeRef} position={position}>
+      {/* Badge background */}
+      <mesh>
+        <planeGeometry args={[1.05, 0.42]} />
+
+        <meshStandardMaterial
+          color="#18181b"
+          roughness={0.3}
+          metalness={0.5}
+          transparent
+          opacity={0.95}
+        />
+      </mesh>
+
+      {/* Badge border */}
+      <mesh position={[0, 0, 0.015]}>
+        <planeGeometry args={[0.92, 0.3]} />
+
+        <meshBasicMaterial
+          color={color}
+          transparent
+          opacity={0.08}
+        />
+      </mesh>
+
+      {/* Technology name */}
+      <Text
+        position={[0, 0, 0.03]}
+        fontSize={0.13}
+        color={color}
+        anchorX="center"
+        anchorY="middle"
+      >
+        {name}
+      </Text>
+    </group>
+  );
+}
+
 function CodeEditor() {
   const groupRef = useRef<THREE.Group>(null);
 
@@ -64,7 +150,7 @@ function CodeEditor() {
       floatIntensity={0.5}
     >
       <group ref={groupRef} rotation={[0.05, -0.15, 0]}>
-        {/* Green glow behind the editor */}
+        {/* Green glow */}
         <mesh position={[0, 0, -0.25]}>
           <planeGeometry args={[4.5, 3.2]} />
 
@@ -75,7 +161,7 @@ function CodeEditor() {
           />
         </mesh>
 
-        {/* Main editor body */}
+        {/* Main editor */}
         <mesh castShadow>
           <boxGeometry args={[3.8, 2.5, 0.22]} />
 
@@ -86,7 +172,7 @@ function CodeEditor() {
           />
         </mesh>
 
-        {/* Inner screen */}
+        {/* Screen */}
         <mesh position={[0, -0.03, 0.125]}>
           <boxGeometry args={[3.55, 1.95, 0.025]} />
 
@@ -101,43 +187,21 @@ function CodeEditor() {
         <mesh position={[0, 1.05, 0.14]}>
           <boxGeometry args={[3.7, 0.35, 0.05]} />
 
-          <meshStandardMaterial
-            color="#27272a"
-            roughness={0.25}
-            metalness={0.5}
-          />
+          <meshStandardMaterial color="#27272a" />
         </mesh>
 
         {/* Window buttons */}
-        <mesh position={[-1.55, 1.05, 0.18]}>
-          <sphereGeometry args={[0.07, 16, 16]} />
+        {[-1.55, -1.35, -1.15].map((x) => (
+          <mesh key={x} position={[x, 1.05, 0.18]}>
+            <sphereGeometry args={[0.07, 16, 16]} />
 
-          <meshStandardMaterial
-            color="#3f3f46"
-            roughness={0.25}
-            metalness={0.5}
-          />
-        </mesh>
-
-        <mesh position={[-1.35, 1.05, 0.18]}>
-          <sphereGeometry args={[0.07, 16, 16]} />
-
-          <meshStandardMaterial
-            color="#3f3f46"
-            roughness={0.25}
-            metalness={0.5}
-          />
-        </mesh>
-
-        <mesh position={[-1.15, 1.05, 0.18]}>
-          <sphereGeometry args={[0.07, 16, 16]} />
-
-          <meshStandardMaterial
-            color="#3f3f46"
-            roughness={0.25}
-            metalness={0.5}
-          />
-        </mesh>
+            <meshStandardMaterial
+              color="#3f3f46"
+              roughness={0.25}
+              metalness={0.5}
+            />
+          </mesh>
+        ))}
 
         {/* Green status indicator */}
         <mesh position={[1.55, 1.05, 0.18]}>
@@ -196,6 +260,15 @@ export default function Hero3D() {
         <Environment preset="city" />
 
         <CodeEditor />
+
+        {technologies.map((technology) => (
+          <TechBadge
+            key={technology.name}
+            name={technology.name}
+            position={technology.position}
+            color={technology.color}
+          />
+        ))}
       </Canvas>
     </div>
   );
