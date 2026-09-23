@@ -1,5 +1,6 @@
 "use client";
 
+import ThemeToggle from "@/components/ThemeToggle";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
 
@@ -35,7 +36,7 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-50 border-b border-zinc-800 bg-[#111315]/90 bg-zinc-950/90 backdrop-blur">
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-        
+
         {/* Logo */}
         <button
           type="button"
@@ -52,11 +53,18 @@ export default function Navbar() {
               key={item.name}
               type="button"
               onClick={() => handleNavigation(item.href)}
-              className="text-sm text-zinc-400 transition-colors hover:text-green-400"
+              className="
+        text-sm
+        text-zinc-400
+        transition-colors
+        hover:text-green-400
+      "
             >
               {item.name}
             </button>
           ))}
+
+          <ThemeToggle />
         </div>
 
         {/* Mobile Menu Button */}
