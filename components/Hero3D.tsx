@@ -316,18 +316,20 @@ function CodeEditor() {
         </mesh>
 
         {/* Code positioned around profile */}
+        {/* Code behind portrait */}
         {codeLines.map((line, index) => (
           <Text
             key={line.text}
             position={[
-              -1.55,
-              0.8 - index * 0.35,
-              0.17,
+              -1.45,
+              0.72 - index * 0.34,
+              0.15,
             ]}
-            fontSize={0.14}
+            fontSize={0.12}
             color={line.color}
             anchorX="left"
             anchorY="middle"
+            fillOpacity={0.65}
           >
             {line.text}
           </Text>
