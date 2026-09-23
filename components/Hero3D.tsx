@@ -35,22 +35,22 @@ const codeLines = [
 const technologies = [
   {
     name: "Java",
-    position: [-2.2, 1.2, 0] as [number, number, number],
+    position: [-2.25, 1.25, 0.05] as [number, number, number],
     color: "#f97316",
   },
   {
     name: "Spring",
-    position: [2.1, 1.1, 0] as [number, number, number],
+    position: [2.15, 1.15, 0.05] as [number, number, number],
     color: "#4ade80",
   },
   {
     name: "React",
-    position: [-2.3, -1.1, 0] as [number, number, number],
+    position: [-2.35, -1.1, 0.05] as [number, number, number],
     color: "#60a5fa",
   },
   {
     name: "Next.js",
-    position: [2.2, -1.1, 0] as [number, number, number],
+    position: [2.25, -1.1, 0.05] as [number, number, number],
     color: "#f5f5f5",
   },
 ];
@@ -66,8 +66,8 @@ function ProfileImage() {
   useFrame((state) => {
     if (!imageRef.current) return;
 
-    const targetRotationY = state.pointer.x * 0.12;
-    const targetRotationX = -state.pointer.y * 0.08;
+    const targetRotationY = state.pointer.x * 0.1;
+    const targetRotationX = -state.pointer.y * 0.06;
 
     imageRef.current.rotation.y = THREE.MathUtils.lerp(
       imageRef.current.rotation.y,
@@ -83,21 +83,28 @@ function ProfileImage() {
   });
 
   return (
-    <group position={[0, -0.05, 0.38]}>
+    <group
+      position={[0.18, -0.05, 0.48]}
+      scale={[1.02, 1.02, 1.02]}
+    >
       {/* Green glow behind portrait */}
-      <mesh position={[0, 0, -0.08]}>
-        <planeGeometry args={[2.5, 3.2]} />
+      <mesh position={[0, 0, -0.1]}>
+        <planeGeometry args={[2.55, 3.25]} />
 
         <meshBasicMaterial
           color="#22c55e"
           transparent
-          opacity={0.055}
+          opacity={0.045}
+          depthWrite={false}
         />
       </mesh>
 
       {/* Dark portrait backing */}
-      <mesh position={[0, 0, -0.04]}>
-        <boxGeometry args={[2.28, 2.98, 0.08]} />
+      <mesh
+        position={[0, 0, -0.055]}
+        castShadow
+      >
+        <boxGeometry args={[2.3, 3, 0.08]} />
 
         <meshStandardMaterial
           color="#09090b"
@@ -117,14 +124,14 @@ function ProfileImage() {
           map={texture}
           transparent
           alphaTest={0.01}
-          depthWrite={false}
+          depthWrite={true}
           roughness={0.35}
           metalness={0.1}
         />
       </mesh>
 
-      {/* Green bottom accent */}
-      <mesh position={[0, -1.42, 0.08]}>
+      {/* Green accent line */}
+      <mesh position={[0, -1.42, 0.09]}>
         <boxGeometry args={[0.8, 0.025, 0.02]} />
 
         <meshBasicMaterial
@@ -184,6 +191,7 @@ function TechBadge({
 
   return (
     <group ref={badgeRef} position={position}>
+      {/* 3D badge body */}
       <mesh castShadow>
         <boxGeometry args={[1.05, 0.42, 0.12]} />
 
@@ -194,6 +202,7 @@ function TechBadge({
         />
       </mesh>
 
+      {/* Inner badge surface */}
       <mesh position={[0, 0, 0.065]}>
         <boxGeometry args={[0.92, 0.3, 0.015]} />
 
@@ -204,6 +213,7 @@ function TechBadge({
         />
       </mesh>
 
+      {/* Technology name */}
       <Text
         position={[0, 0, 0.085]}
         fontSize={0.13}
@@ -214,6 +224,7 @@ function TechBadge({
         {name}
       </Text>
 
+      {/* Accent line */}
       <mesh position={[0, -0.14, 0.085]}>
         <boxGeometry args={[0.45, 0.015, 0.01]} />
 
@@ -233,33 +244,42 @@ function CodeEditor() {
   useFrame((state) => {
     if (!groupRef.current) return;
 
-    const targetRotationY = state.pointer.x * 0.25;
-    const targetRotationX = -state.pointer.y * 0.15;
+    /*
+     * The editor moves less than the portrait.
+     * This creates a layered depth effect.
+     */
+    const targetRotationY =
+      state.pointer.x * 0.2;
 
-    groupRef.current.rotation.y = THREE.MathUtils.lerp(
-      groupRef.current.rotation.y,
-      targetRotationY,
-      0.05
-    );
+    const targetRotationX =
+      -state.pointer.y * 0.12;
 
-    groupRef.current.rotation.x = THREE.MathUtils.lerp(
-      groupRef.current.rotation.x,
-      targetRotationX,
-      0.05
-    );
+    groupRef.current.rotation.y =
+      THREE.MathUtils.lerp(
+        groupRef.current.rotation.y,
+        targetRotationY,
+        0.05
+      );
+
+    groupRef.current.rotation.x =
+      THREE.MathUtils.lerp(
+        groupRef.current.rotation.x,
+        targetRotationX,
+        0.05
+      );
   });
 
   return (
     <Float
-      speed={1.5}
-      rotationIntensity={0.06}
-      floatIntensity={0.4}
+      speed={1.3}
+      rotationIntensity={0.05}
+      floatIntensity={0.35}
     >
       <group
         ref={groupRef}
         rotation={[0.05, -0.15, 0]}
       >
-        {/* Editor body behind the profile */}
+        {/* Main editor body */}
         <mesh castShadow>
           <boxGeometry args={[3.8, 2.8, 0.22]} />
 
@@ -270,7 +290,7 @@ function CodeEditor() {
           />
         </mesh>
 
-        {/* Screen */}
+        {/* Inner screen */}
         <mesh position={[0, 0, 0.125]}>
           <boxGeometry args={[3.55, 2.45, 0.025]} />
 
@@ -281,11 +301,15 @@ function CodeEditor() {
           />
         </mesh>
 
-        {/* Top bar */}
+        {/* Top editor bar */}
         <mesh position={[0, 1.2, 0.15]}>
           <boxGeometry args={[3.7, 0.35, 0.05]} />
 
-          <meshStandardMaterial color="#27272a" />
+          <meshStandardMaterial
+            color="#27272a"
+            roughness={0.25}
+            metalness={0.5}
+          />
         </mesh>
 
         {/* Window buttons */}
@@ -304,7 +328,7 @@ function CodeEditor() {
           </mesh>
         ))}
 
-        {/* Status indicator */}
+        {/* Green status indicator */}
         <mesh position={[1.55, 1.2, 0.18]}>
           <sphereGeometry args={[0.045, 16, 16]} />
 
@@ -315,27 +339,26 @@ function CodeEditor() {
           />
         </mesh>
 
-        {/* Code positioned around profile */}
         {/* Code behind portrait */}
         {codeLines.map((line, index) => (
           <Text
             key={line.text}
             position={[
-              -1.45,
-              0.72 - index * 0.34,
-              0.15,
+              -1.5,
+              0.75 - index * 0.34,
+              0.145,
             ]}
-            fontSize={0.12}
+            fontSize={0.115}
             color={line.color}
             anchorX="left"
             anchorY="middle"
-            fillOpacity={0.65}
+            fillOpacity={0.6}
           >
             {line.text}
           </Text>
         ))}
 
-        {/* Profile image */}
+        {/* Portrait in front of editor */}
         <ProfileImage />
       </group>
     </Float>
@@ -351,7 +374,11 @@ function FloatingPlatform() {
     const time = state.clock.elapsedTime;
 
     platformRef.current.position.y =
-      -1.65 + Math.sin(time * 0.7) * 0.025;
+      -1.65 +
+      Math.sin(time * 0.7) * 0.025;
+
+    platformRef.current.rotation.z =
+      Math.sin(time * 0.4) * 0.01;
   });
 
   return (
@@ -382,14 +409,17 @@ export default function Hero3D() {
         }}
         shadows
       >
+        {/* Base lighting */}
         <ambientLight intensity={0.5} />
 
+        {/* Main light */}
         <directionalLight
           position={[3, 4, 5]}
           intensity={2}
           castShadow
         />
 
+        {/* Main green light */}
         <pointLight
           position={[0, 0, 2]}
           color="#22c55e"
@@ -397,10 +427,21 @@ export default function Hero3D() {
           distance={6}
         />
 
+        {/* Secondary green rim light */}
+        <pointLight
+          position={[-2, 1, 2]}
+          color="#22c55e"
+          intensity={1.2}
+          distance={5}
+        />
+
+        {/* Environment */}
         <Environment preset="city" />
 
+        {/* 3D editor */}
         <CodeEditor />
 
+        {/* Technology badges */}
         {technologies.map((technology) => (
           <TechBadge
             key={technology.name}
@@ -410,6 +451,7 @@ export default function Hero3D() {
           />
         ))}
 
+        {/* Floating platform */}
         <FloatingPlatform />
       </Canvas>
     </div>
