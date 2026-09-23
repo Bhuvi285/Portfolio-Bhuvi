@@ -84,8 +84,8 @@ function ProfileImage() {
 
   return (
     <group
-      position={[0.18, -0.05, 0.48]}
-      scale={[1.02, 1.02, 1.02]}
+      position={[0.18, -0.02, 0.52]}
+      scale={[1.05, 1.05, 1.05]}
     >
       {/* Green glow behind portrait */}
       <mesh position={[0, 0, -0.1]}>
@@ -130,7 +130,7 @@ function ProfileImage() {
         />
       </mesh>
 
-      {/* Green accent line */}
+      {/* Green portrait accent */}
       <mesh position={[0, -1.42, 0.09]}>
         <boxGeometry args={[0.8, 0.025, 0.02]} />
 
@@ -224,7 +224,7 @@ function TechBadge({
         {name}
       </Text>
 
-      {/* Accent line */}
+      {/* Badge accent */}
       <mesh position={[0, -0.14, 0.085]}>
         <boxGeometry args={[0.45, 0.015, 0.01]} />
 
@@ -244,29 +244,20 @@ function CodeEditor() {
   useFrame((state) => {
     if (!groupRef.current) return;
 
-    /*
-     * The editor moves less than the portrait.
-     * This creates a layered depth effect.
-     */
-    const targetRotationY =
-      state.pointer.x * 0.2;
+    const targetRotationY = state.pointer.x * 0.2;
+    const targetRotationX = -state.pointer.y * 0.12;
 
-    const targetRotationX =
-      -state.pointer.y * 0.12;
+    groupRef.current.rotation.y = THREE.MathUtils.lerp(
+      groupRef.current.rotation.y,
+      targetRotationY,
+      0.05
+    );
 
-    groupRef.current.rotation.y =
-      THREE.MathUtils.lerp(
-        groupRef.current.rotation.y,
-        targetRotationY,
-        0.05
-      );
-
-    groupRef.current.rotation.x =
-      THREE.MathUtils.lerp(
-        groupRef.current.rotation.x,
-        targetRotationX,
-        0.05
-      );
+    groupRef.current.rotation.x = THREE.MathUtils.lerp(
+      groupRef.current.rotation.x,
+      targetRotationX,
+      0.05
+    );
   });
 
   return (
@@ -352,11 +343,22 @@ function CodeEditor() {
             color={line.color}
             anchorX="left"
             anchorY="middle"
-            fillOpacity={0.6}
+            fillOpacity={0.45}
           >
             {line.text}
           </Text>
         ))}
+
+        {/* Green edge accent */}
+        <mesh position={[0, -1.39, 0.03]}>
+          <boxGeometry args={[1.1, 0.025, 0.025]} />
+
+          <meshBasicMaterial
+            color="#4ade80"
+            transparent
+            opacity={0.65}
+          />
+        </mesh>
 
         {/* Portrait in front of editor */}
         <ProfileImage />
@@ -374,8 +376,7 @@ function FloatingPlatform() {
     const time = state.clock.elapsedTime;
 
     platformRef.current.position.y =
-      -1.65 +
-      Math.sin(time * 0.7) * 0.025;
+      -1.65 + Math.sin(time * 0.7) * 0.025;
 
     platformRef.current.rotation.z =
       Math.sin(time * 0.4) * 0.01;
@@ -401,11 +402,11 @@ function FloatingPlatform() {
 
 export default function Hero3D() {
   return (
-    <div className="h-[420px] w-full sm:h-[460px] lg:h-[500px]">
+    <div className="relative h-[380px] w-full sm:h-[460px] lg:h-[520px]">
       <Canvas
         camera={{
-          position: [0, 0, 6],
-          fov: 45,
+          position: [0, 0, 6.5],
+          fov: 42,
         }}
         shadows
       >
@@ -438,10 +439,10 @@ export default function Hero3D() {
         {/* Environment */}
         <Environment preset="city" />
 
-        {/* 3D editor */}
+        {/* Main 3D editor */}
         <CodeEditor />
 
-        {/* Technology badges */}
+        {/* Floating technologies */}
         {technologies.map((technology) => (
           <TechBadge
             key={technology.name}
