@@ -36,13 +36,13 @@ export default function ThemeToggle() {
       className="
         flex h-9 w-9 items-center justify-center
         rounded-lg
-        border border-zinc-800
-        bg-zinc-900
-        text-zinc-400
+        border border-[var(--border)]
+        bg-[var(--card)]
+        text-[var(--muted)]
         transition-all duration-300
-        hover:border-zinc-700
-        hover:bg-zinc-800
-        hover:text-green-400
+        hover:-translate-y-0.5
+        hover:border-[var(--accent)]
+        hover:text-[var(--accent)]
       "
     >
       {isDark ? (
