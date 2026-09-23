@@ -104,7 +104,7 @@ const projects = [
     technologies: ["React", "JavaScript"],
     github:
       "https://github.com/Bhuvi285/To-Do-List-with-React-JS",
-    live: "",
+    live: "https://to-do-list-with-react-js-ruddy.vercel.app/",
     status: "completed",
     featured: false,
   },
