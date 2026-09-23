@@ -58,7 +58,7 @@ const technologies = [
 function ProfileImage() {
   const texture = useLoader(
     THREE.TextureLoader,
-    "/portfolio-hero.png"
+    "/bhuvanesh-portrait.png"
   );
 
   const imageRef = useRef<THREE.Mesh>(null);
