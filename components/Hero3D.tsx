@@ -1,35 +1,16 @@
 "use client";
 
-import { Canvas, useFrame, useLoader } from "@react-three/fiber";
-import {
-  Environment,
-  Float,
-  Text,
-} from "@react-three/drei";
+import { Canvas, useFrame } from "@react-three/fiber";
+import { Environment, Float, Text } from "@react-three/drei";
 import { useRef } from "react";
 import * as THREE from "three";
 
 const codeLines = [
-  {
-    text: "const developer = {",
-    color: "#f5f5f5",
-  },
-  {
-    text: '  name: "Bhuvanesh",',
-    color: "#4ade80",
-  },
-  {
-    text: '  role: "Full Stack Developer",',
-    color: "#60a5fa",
-  },
-  {
-    text: '  stack: ["Java", "React"],',
-    color: "#c084fc",
-  },
-  {
-    text: "};",
-    color: "#f5f5f5",
-  },
+  { text: "const developer = {", color: "#f5f5f5" },
+  { text: '  name: "Bhuvanesh",', color: "#4ade80" },
+  { text: '  role: "Full Stack Developer",', color: "#60a5fa" },
+  { text: '  stack: ["Java", "React"],', color: "#c084fc" },
+  { text: "};", color: "#f5f5f5" },
 ];
 
 const technologies = [
@@ -54,95 +35,6 @@ const technologies = [
     color: "#f5f5f5",
   },
 ];
-
-function ProfileImage() {
-  const texture = useLoader(
-    THREE.TextureLoader,
-    "/bhuvanesh-portrait.png"
-  );
-
-  const imageRef = useRef<THREE.Mesh>(null);
-
-  useFrame((state) => {
-    if (!imageRef.current) return;
-
-    const targetRotationY = state.pointer.x * 0.1;
-    const targetRotationX = -state.pointer.y * 0.06;
-
-    imageRef.current.rotation.y = THREE.MathUtils.lerp(
-      imageRef.current.rotation.y,
-      targetRotationY,
-      0.05
-    );
-
-    imageRef.current.rotation.x = THREE.MathUtils.lerp(
-      imageRef.current.rotation.x,
-      targetRotationX,
-      0.05
-    );
-  });
-
-  return (
-    <group
-      position={[0.18, -0.02, 0.52]}
-      scale={[1.05, 1.05, 1.05]}
-    >
-      {/* Green glow behind portrait */}
-      <mesh position={[0, 0, -0.1]}>
-        <planeGeometry args={[2.55, 3.25]} />
-
-        <meshBasicMaterial
-          color="#22c55e"
-          transparent
-          opacity={0.045}
-          depthWrite={false}
-        />
-      </mesh>
-
-      {/* Dark portrait backing */}
-      <mesh
-        position={[0, 0, -0.055]}
-        castShadow
-      >
-        <boxGeometry args={[2.3, 3, 0.08]} />
-
-        <meshStandardMaterial
-          color="#09090b"
-          roughness={0.3}
-          metalness={0.55}
-        />
-      </mesh>
-
-      {/* Portrait */}
-      <mesh
-        ref={imageRef}
-        castShadow
-      >
-        <planeGeometry args={[2.1, 2.8]} />
-
-        <meshStandardMaterial
-          map={texture}
-          transparent
-          alphaTest={0.01}
-          depthWrite={true}
-          roughness={0.35}
-          metalness={0.1}
-        />
-      </mesh>
-
-      {/* Green portrait accent */}
-      <mesh position={[0, -1.42, 0.09]}>
-        <boxGeometry args={[0.8, 0.025, 0.02]} />
-
-        <meshBasicMaterial
-          color="#4ade80"
-          transparent
-          opacity={0.8}
-        />
-      </mesh>
-    </group>
-  );
-}
 
 function TechBadge({
   name,
@@ -191,10 +83,8 @@ function TechBadge({
 
   return (
     <group ref={badgeRef} position={position}>
-      {/* 3D badge body */}
       <mesh castShadow>
         <boxGeometry args={[1.05, 0.42, 0.12]} />
-
         <meshStandardMaterial
           color="#18181b"
           roughness={0.25}
@@ -202,10 +92,8 @@ function TechBadge({
         />
       </mesh>
 
-      {/* Inner badge surface */}
       <mesh position={[0, 0, 0.065]}>
         <boxGeometry args={[0.92, 0.3, 0.015]} />
-
         <meshStandardMaterial
           color="#09090b"
           roughness={0.35}
@@ -213,7 +101,6 @@ function TechBadge({
         />
       </mesh>
 
-      {/* Technology name */}
       <Text
         position={[0, 0, 0.085]}
         fontSize={0.13}
@@ -224,10 +111,8 @@ function TechBadge({
         {name}
       </Text>
 
-      {/* Badge accent */}
       <mesh position={[0, -0.14, 0.085]}>
         <boxGeometry args={[0.45, 0.015, 0.01]} />
-
         <meshBasicMaterial
           color={color}
           transparent
@@ -273,7 +158,6 @@ function CodeEditor() {
         {/* Main editor body */}
         <mesh castShadow>
           <boxGeometry args={[3.8, 2.8, 0.22]} />
-
           <meshStandardMaterial
             color="#111113"
             roughness={0.3}
@@ -281,10 +165,9 @@ function CodeEditor() {
           />
         </mesh>
 
-        {/* Inner screen */}
+        {/* Screen */}
         <mesh position={[0, 0, 0.125]}>
           <boxGeometry args={[3.55, 2.45, 0.025]} />
-
           <meshStandardMaterial
             color="#09090b"
             roughness={0.4}
@@ -292,10 +175,9 @@ function CodeEditor() {
           />
         </mesh>
 
-        {/* Top editor bar */}
+        {/* Top bar */}
         <mesh position={[0, 1.2, 0.15]}>
           <boxGeometry args={[3.7, 0.35, 0.05]} />
-
           <meshStandardMaterial
             color="#27272a"
             roughness={0.25}
@@ -310,7 +192,6 @@ function CodeEditor() {
             position={[x, 1.2, 0.18]}
           >
             <sphereGeometry args={[0.07, 16, 16]} />
-
             <meshStandardMaterial
               color="#3f3f46"
               roughness={0.25}
@@ -319,10 +200,9 @@ function CodeEditor() {
           </mesh>
         ))}
 
-        {/* Green status indicator */}
+        {/* Green status light */}
         <mesh position={[1.55, 1.2, 0.18]}>
           <sphereGeometry args={[0.045, 16, 16]} />
-
           <meshStandardMaterial
             color="#4ade80"
             emissive="#22c55e"
@@ -330,7 +210,7 @@ function CodeEditor() {
           />
         </mesh>
 
-        {/* Code behind portrait */}
+        {/* Code */}
         {codeLines.map((line, index) => (
           <Text
             key={line.text}
@@ -349,19 +229,15 @@ function CodeEditor() {
           </Text>
         ))}
 
-        {/* Green edge accent */}
+        {/* Bottom accent */}
         <mesh position={[0, -1.39, 0.03]}>
           <boxGeometry args={[1.1, 0.025, 0.025]} />
-
           <meshBasicMaterial
             color="#4ade80"
             transparent
             opacity={0.65}
           />
         </mesh>
-
-        {/* Portrait in front of editor */}
-        <ProfileImage />
       </group>
     </Float>
   );
@@ -390,7 +266,6 @@ function FloatingPlatform() {
       receiveShadow
     >
       <boxGeometry args={[4.8, 0.12, 2.2]} />
-
       <meshStandardMaterial
         color="#0f0f11"
         roughness={0.35}
@@ -410,17 +285,14 @@ export default function Hero3D() {
         }}
         shadows
       >
-        {/* Base lighting */}
         <ambientLight intensity={0.5} />
 
-        {/* Main light */}
         <directionalLight
           position={[3, 4, 5]}
           intensity={2}
           castShadow
         />
 
-        {/* Main green light */}
         <pointLight
           position={[0, 0, 2]}
           color="#22c55e"
@@ -428,7 +300,6 @@ export default function Hero3D() {
           distance={6}
         />
 
-        {/* Secondary green rim light */}
         <pointLight
           position={[-2, 1, 2]}
           color="#22c55e"
@@ -436,13 +307,10 @@ export default function Hero3D() {
           distance={5}
         />
 
-        {/* Environment */}
         <Environment preset="city" />
 
-        {/* Main 3D editor */}
         <CodeEditor />
 
-        {/* Floating technologies */}
         {technologies.map((technology) => (
           <TechBadge
             key={technology.name}
@@ -452,7 +320,6 @@ export default function Hero3D() {
           />
         ))}
 
-        {/* Floating platform */}
         <FloatingPlatform />
       </Canvas>
     </div>
