@@ -1,6 +1,6 @@
 "use client";
 
-import { Canvas, useFrame } from "@react-three/fiber";
+import { Canvas, useFrame, useLoader } from "@react-three/fiber";
 import {
   Environment,
   Float,
@@ -54,6 +54,51 @@ const technologies = [
     color: "#f5f5f5",
   },
 ];
+
+function ProfileImage() {
+  const texture = useLoader(
+    THREE.TextureLoader,
+    "/portfolio-hero.png"
+  );
+
+  const imageRef = useRef<THREE.Mesh>(null);
+
+  useFrame((state) => {
+    if (!imageRef.current) return;
+
+    const targetY = state.pointer.x * 0.08;
+    const targetX = -state.pointer.y * 0.05;
+
+    imageRef.current.rotation.y = THREE.MathUtils.lerp(
+      imageRef.current.rotation.y,
+      targetY,
+      0.05
+    );
+
+    imageRef.current.rotation.x = THREE.MathUtils.lerp(
+      imageRef.current.rotation.x,
+      targetX,
+      0.05
+    );
+  });
+
+  return (
+    <mesh
+      ref={imageRef}
+      position={[0, -0.05, 0.32]}
+      castShadow
+    >
+      <planeGeometry args={[2.1, 2.8]} />
+
+      <meshStandardMaterial
+        map={texture}
+        transparent
+        roughness={0.35}
+        metalness={0.1}
+      />
+    </mesh>
+  );
+}
 
 function TechBadge({
   name,
@@ -151,51 +196,35 @@ function CodeEditor() {
   useFrame((state) => {
     if (!groupRef.current) return;
 
-    const targetRotationY =
-      state.pointer.x * 0.35;
+    const targetRotationY = state.pointer.x * 0.25;
+    const targetRotationX = -state.pointer.y * 0.15;
 
-    const targetRotationX =
-      -state.pointer.y * 0.2;
+    groupRef.current.rotation.y = THREE.MathUtils.lerp(
+      groupRef.current.rotation.y,
+      targetRotationY,
+      0.05
+    );
 
-    groupRef.current.rotation.y =
-      THREE.MathUtils.lerp(
-        groupRef.current.rotation.y,
-        targetRotationY,
-        0.05
-      );
-
-    groupRef.current.rotation.x =
-      THREE.MathUtils.lerp(
-        groupRef.current.rotation.x,
-        targetRotationX,
-        0.05
-      );
+    groupRef.current.rotation.x = THREE.MathUtils.lerp(
+      groupRef.current.rotation.x,
+      targetRotationX,
+      0.05
+    );
   });
 
   return (
     <Float
       speed={1.5}
-      rotationIntensity={0.08}
-      floatIntensity={0.5}
+      rotationIntensity={0.06}
+      floatIntensity={0.4}
     >
       <group
         ref={groupRef}
         rotation={[0.05, -0.15, 0]}
       >
-        {/* Green glow */}
-        <mesh position={[0, 0, -0.25]}>
-          <planeGeometry args={[4.5, 3.2]} />
-
-          <meshBasicMaterial
-            color="#22c55e"
-            transparent
-            opacity={0.035}
-          />
-        </mesh>
-
-        {/* Main editor */}
+        {/* Editor body behind the profile */}
         <mesh castShadow>
-          <boxGeometry args={[3.8, 2.5, 0.22]} />
+          <boxGeometry args={[3.8, 2.8, 0.22]} />
 
           <meshStandardMaterial
             color="#111113"
@@ -205,8 +234,8 @@ function CodeEditor() {
         </mesh>
 
         {/* Screen */}
-        <mesh position={[0, -0.03, 0.125]}>
-          <boxGeometry args={[3.55, 1.95, 0.025]} />
+        <mesh position={[0, 0, 0.125]}>
+          <boxGeometry args={[3.55, 2.45, 0.025]} />
 
           <meshStandardMaterial
             color="#09090b"
@@ -216,7 +245,7 @@ function CodeEditor() {
         </mesh>
 
         {/* Top bar */}
-        <mesh position={[0, 1.05, 0.14]}>
+        <mesh position={[0, 1.2, 0.15]}>
           <boxGeometry args={[3.7, 0.35, 0.05]} />
 
           <meshStandardMaterial color="#27272a" />
@@ -226,7 +255,7 @@ function CodeEditor() {
         {[-1.55, -1.35, -1.15].map((x) => (
           <mesh
             key={x}
-            position={[x, 1.05, 0.18]}
+            position={[x, 1.2, 0.18]}
           >
             <sphereGeometry args={[0.07, 16, 16]} />
 
@@ -238,8 +267,8 @@ function CodeEditor() {
           </mesh>
         ))}
 
-        {/* Status light */}
-        <mesh position={[1.55, 1.05, 0.18]}>
+        {/* Status indicator */}
+        <mesh position={[1.55, 1.2, 0.18]}>
           <sphereGeometry args={[0.045, 16, 16]} />
 
           <meshStandardMaterial
@@ -249,16 +278,16 @@ function CodeEditor() {
           />
         </mesh>
 
-        {/* Code */}
+        {/* Code positioned around profile */}
         {codeLines.map((line, index) => (
           <Text
             key={line.text}
             position={[
-              -1.35,
-              0.55 - index * 0.35,
-              0.16,
+              -1.55,
+              0.8 - index * 0.35,
+              0.17,
             ]}
-            fontSize={0.16}
+            fontSize={0.14}
             color={line.color}
             anchorX="left"
             anchorY="middle"
@@ -266,6 +295,9 @@ function CodeEditor() {
             {line.text}
           </Text>
         ))}
+
+        {/* Profile image */}
+        <ProfileImage />
       </group>
     </Float>
   );
@@ -278,9 +310,6 @@ function FloatingPlatform() {
     if (!platformRef.current) return;
 
     const time = state.clock.elapsedTime;
-
-    platformRef.current.rotation.z =
-      Math.sin(time * 0.4) * 0.015;
 
     platformRef.current.position.y =
       -1.65 + Math.sin(time * 0.7) * 0.025;
@@ -306,7 +335,7 @@ function FloatingPlatform() {
 
 export default function Hero3D() {
   return (
-    <div className="h-[420px] w-full">
+    <div className="h-[420px] w-full sm:h-[460px] lg:h-[500px]">
       <Canvas
         camera={{
           position: [0, 0, 6],
@@ -314,7 +343,6 @@ export default function Hero3D() {
         }}
         shadows
       >
-        {/* Lighting */}
         <ambientLight intensity={0.5} />
 
         <directionalLight
@@ -332,7 +360,6 @@ export default function Hero3D() {
 
         <Environment preset="city" />
 
-        {/* Main objects */}
         <CodeEditor />
 
         {technologies.map((technology) => (
