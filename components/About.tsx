@@ -72,7 +72,7 @@ export default function About() {
         </motion.div>
 
         {/* Main Content */}
-        <div className="mt-12 grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+        <div className="mt-12 grid items-center gap-10 lg:grid-cols-2 lg:gap-12">
 
           {/* Left Side - 3D Developer Scene */}
           <motion.div
@@ -94,9 +94,11 @@ export default function About() {
               duration: 0.8,
               ease: "easeOut" as const,
             }}
-            className="relative flex min-h-[380px] items-center justify-center overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-950/40"
+            className="flex items-center justify-center"
           >
-            <Hero3D />
+            <div className="w-full max-w-[500px] scale-[0.9]">
+              <Hero3D />
+            </div>
           </motion.div>
 
           {/* Right Side - About Content */}
@@ -162,7 +164,7 @@ export default function About() {
                     className="rounded-xl border border-zinc-800 bg-zinc-950 p-5 transition-colors hover:border-zinc-700"
                   >
                     <div className="flex gap-4">
-                      
+
                       {/* Icon */}
                       <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-zinc-800 bg-zinc-900">
                         <Icon
