@@ -1,24 +1,19 @@
 @import "tailwindcss";
 
+:root {
+  --background: #111315;
+  --foreground: #f5f5f5;
+}
+
 html {
   scroll-behavior: smooth;
 }
 
 body {
-  margin: 0;
-  background: #0a0a0a;
-  color: #f5f5f5;
-  font-family: var(--font-geist), sans-serif;
+  background: var(--background);
+  color: var(--foreground);
 }
 
 section {
-  scroll-margin-top: 100px;
-}
-
-main > section {
-  padding-block: 0.5rem;
-}
-
-.relative.z-10 > section {
-  padding-block: 3rem;
+  scroll-margin-top: 80px;
 }
