@@ -66,37 +66,74 @@ function ProfileImage() {
   useFrame((state) => {
     if (!imageRef.current) return;
 
-    const targetY = state.pointer.x * 0.08;
-    const targetX = -state.pointer.y * 0.05;
+    const targetRotationY = state.pointer.x * 0.12;
+    const targetRotationX = -state.pointer.y * 0.08;
 
     imageRef.current.rotation.y = THREE.MathUtils.lerp(
       imageRef.current.rotation.y,
-      targetY,
+      targetRotationY,
       0.05
     );
 
     imageRef.current.rotation.x = THREE.MathUtils.lerp(
       imageRef.current.rotation.x,
-      targetX,
+      targetRotationX,
       0.05
     );
   });
 
   return (
-    <mesh
-      ref={imageRef}
-      position={[0, -0.05, 0.32]}
-      castShadow
-    >
-      <planeGeometry args={[2.1, 2.8]} />
+    <group position={[0, -0.05, 0.38]}>
+      {/* Green glow behind portrait */}
+      <mesh position={[0, 0, -0.08]}>
+        <planeGeometry args={[2.5, 3.2]} />
 
-      <meshStandardMaterial
-        map={texture}
-        transparent
-        roughness={0.35}
-        metalness={0.1}
-      />
-    </mesh>
+        <meshBasicMaterial
+          color="#22c55e"
+          transparent
+          opacity={0.055}
+        />
+      </mesh>
+
+      {/* Dark portrait backing */}
+      <mesh position={[0, 0, -0.04]}>
+        <boxGeometry args={[2.28, 2.98, 0.08]} />
+
+        <meshStandardMaterial
+          color="#09090b"
+          roughness={0.3}
+          metalness={0.55}
+        />
+      </mesh>
+
+      {/* Portrait */}
+      <mesh
+        ref={imageRef}
+        castShadow
+      >
+        <planeGeometry args={[2.1, 2.8]} />
+
+        <meshStandardMaterial
+          map={texture}
+          transparent
+          alphaTest={0.01}
+          depthWrite={false}
+          roughness={0.35}
+          metalness={0.1}
+        />
+      </mesh>
+
+      {/* Green bottom accent */}
+      <mesh position={[0, -1.42, 0.08]}>
+        <boxGeometry args={[0.8, 0.025, 0.02]} />
+
+        <meshBasicMaterial
+          color="#4ade80"
+          transparent
+          opacity={0.8}
+        />
+      </mesh>
+    </group>
   );
 }
 
