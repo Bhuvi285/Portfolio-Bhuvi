@@ -3,8 +3,8 @@
 import { motion } from "framer-motion";
 import {
   ArrowUpRight,
+  Code2,
   GitBranch,
-  GithubIcon,
   Star,
 } from "lucide-react";
 
@@ -244,7 +244,7 @@ export default function GitHub() {
                 group-hover:border-[var(--accent)]
               "
             >
-              <GithubIcon
+              <Code2
                 size={21}
                 className="
                   text-[var(--foreground)]
