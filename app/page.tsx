@@ -22,7 +22,7 @@ export default function Page() {
         <InteractiveBackground />
 
         <div className="relative z-10">
-          <Hero3D />
+          {/* <Hero3D /> */}
           <Home />
           <About />
           <Skills />

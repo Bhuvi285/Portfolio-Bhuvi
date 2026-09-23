@@ -43,10 +43,7 @@ const cardVariants = {
 
 export default function About() {
   return (
-    <section
-      id="about"
-      className="px-6 py-24"
-    >
+    <section id="about" className="px-6 py-24">
       <div className="mx-auto max-w-7xl">
 
         {/* Section Heading */}
@@ -96,7 +93,7 @@ export default function About() {
             }}
             className="flex items-center justify-center"
           >
-            <div className="w-full max-w-[500px] scale-[0.9]">
+            <div className="w-full">
               <Hero3D />
             </div>
           </motion.div>

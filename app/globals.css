@@ -16,5 +16,9 @@ section {
 }
 
 main > section {
+  padding-block: 0.5rem;
+}
+
+.relative.z-10 > section {
   padding-block: 3rem;
 }
