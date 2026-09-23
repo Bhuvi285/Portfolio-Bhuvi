@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
+import ThemeProvider from "@/components/ThemeProvider";
+
 const geist = Geist({
   variable: "--font-geist",
   subsets: ["latin"],
@@ -14,7 +16,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Bhuvanesh | Full Stack Java Developer",
-  description: "Portfolio of Bhuvanesh, a Full Stack Java Developer.",
+  description:
+    "Portfolio of Bhuvanesh, a Full Stack Java Developer.",
 };
 
 export default function RootLayout({
@@ -23,11 +26,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${geist.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <ThemeProvider>
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );
