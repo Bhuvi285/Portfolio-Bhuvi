@@ -43,7 +43,10 @@ const cardVariants = {
 
 export default function About() {
   return (
-    <section id="about" className="px-6 py-24">
+    <section
+      id="about"
+      className="px-6 py-24"
+    >
       <div className="mx-auto max-w-7xl">
 
         {/* Section Heading */}
@@ -59,11 +62,18 @@ export default function About() {
             ease: "easeOut" as const,
           }}
         >
-          <p className="font-mono text-sm text-green-400">
+          <p className="font-mono text-sm text-[var(--accent)]">
             01 / ABOUT ME
           </p>
 
-          <h2 className="mt-3 text-3xl font-bold text-white sm:text-4xl">
+          <h2
+            className="
+              mt-3
+              text-3xl font-bold
+              text-[var(--foreground)]
+              sm:text-4xl
+            "
+          >
             A little about me
           </h2>
         </motion.div>
@@ -120,13 +130,27 @@ export default function About() {
                 ease: "easeOut" as const,
               }}
             >
-              <p className="max-w-2xl text-lg leading-8 text-zinc-400">
+              <p
+                className="
+                  max-w-2xl
+                  text-lg
+                  leading-8
+                  text-[var(--muted)]
+                "
+              >
                 I am a Computer Engineering student passionate about
                 software development and building practical web
                 applications.
               </p>
 
-              <p className="mt-5 max-w-2xl leading-7 text-zinc-500">
+              <p
+                className="
+                  mt-5
+                  max-w-2xl
+                  leading-7
+                  text-[var(--muted-light)]
+                "
+              >
                 I enjoy working with Java, Spring Boot, React,
                 Next.js and modern web technologies. I am continuously
                 improving my understanding of full-stack development
@@ -158,25 +182,74 @@ export default function About() {
                       duration: 0.5,
                       ease: "easeOut" as const,
                     }}
-                    className="rounded-xl border border-zinc-800 bg-zinc-950 p-5 transition-colors hover:border-zinc-700"
+                    className="
+                      group
+                      rounded-xl
+                      border border-[var(--border)]
+                      bg-[var(--card)]
+                      p-5
+
+                      transition-all
+                      duration-300
+                      ease-out
+
+                      hover:-translate-y-1
+                      hover:border-[var(--accent)]
+                      hover:bg-[var(--card-secondary)]
+                      hover:shadow-lg
+                      hover:shadow-black/10
+                    "
                   >
                     <div className="flex gap-4">
 
                       {/* Icon */}
-                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-zinc-800 bg-zinc-900">
+                      <div
+                        className="
+                          flex h-10 w-10 shrink-0
+                          items-center justify-center
+                          rounded-lg
+                          border border-[var(--border)]
+                          bg-[var(--card-secondary)]
+                          transition-all duration-300
+                          group-hover:border-[var(--accent)]
+                        "
+                      >
                         <Icon
                           size={20}
-                          className="text-green-400"
+                          className="
+                            text-[var(--accent)]
+                            transition-transform
+                            duration-300
+                            group-hover:scale-110
+                          "
                         />
                       </div>
 
                       {/* Text */}
                       <div>
-                        <h3 className="font-semibold text-white">
+                        <h3
+                          className="
+                            font-semibold
+                            text-[var(--foreground)]
+                            transition-colors
+                            duration-300
+                            group-hover:text-[var(--accent)]
+                          "
+                        >
                           {item.title}
                         </h3>
 
-                        <p className="mt-1 text-sm leading-6 text-zinc-500">
+                        <p
+                          className="
+                            mt-1
+                            text-sm
+                            leading-6
+                            text-[var(--muted)]
+                            transition-colors
+                            duration-300
+                            group-hover:text-[var(--foreground)]
+                          "
+                        >
                           {item.description}
                         </p>
                       </div>
