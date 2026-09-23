@@ -48,11 +48,15 @@ export default function About() {
       className="px-6 py-24"
     >
       <div className="mx-auto max-w-7xl">
-        {/* Section heading */}
+
+        {/* Section Heading */}
         <motion.div
           initial={{ opacity: 0, y: 25 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
+          viewport={{
+            once: true,
+            amount: 0.3,
+          }}
           transition={{
             duration: 0.6,
             ease: "easeOut" as const,
@@ -67,14 +71,51 @@ export default function About() {
           </h2>
         </motion.div>
 
-        {/* Main content */}
+        {/* Main Content */}
         <div className="mt-12 grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
-          {/* Left side */}
+
+          {/* Left Side - 3D Developer Scene */}
+          <motion.div
+            initial={{
+              opacity: 0,
+              x: -30,
+              scale: 0.96,
+            }}
+            whileInView={{
+              opacity: 1,
+              x: 0,
+              scale: 1,
+            }}
+            viewport={{
+              once: true,
+              amount: 0.2,
+            }}
+            transition={{
+              duration: 0.8,
+              ease: "easeOut" as const,
+            }}
+            className="relative flex min-h-[380px] items-center justify-center overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-950/40"
+          >
+            <Hero3D />
+          </motion.div>
+
+          {/* Right Side - About Content */}
           <div>
+
+            {/* Introduction */}
             <motion.div
-              initial={{ opacity: 0, x: -25 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
+              initial={{
+                opacity: 0,
+                x: 25,
+              }}
+              whileInView={{
+                opacity: 1,
+                x: 0,
+              }}
+              viewport={{
+                once: true,
+                amount: 0.2,
+              }}
               transition={{
                 duration: 0.6,
                 ease: "easeOut" as const,
@@ -121,6 +162,8 @@ export default function About() {
                     className="rounded-xl border border-zinc-800 bg-zinc-950 p-5 transition-colors hover:border-zinc-700"
                   >
                     <div className="flex gap-4">
+                      
+                      {/* Icon */}
                       <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-zinc-800 bg-zinc-900">
                         <Icon
                           size={20}
@@ -128,6 +171,7 @@ export default function About() {
                         />
                       </div>
 
+                      {/* Text */}
                       <div>
                         <h3 className="font-semibold text-white">
                           {item.title}
@@ -137,37 +181,14 @@ export default function About() {
                           {item.description}
                         </p>
                       </div>
+
                     </div>
                   </motion.div>
                 );
               })}
             </motion.div>
-          </div>
 
-          {/* Right side - 3D */}
-          <motion.div
-            initial={{
-              opacity: 0,
-              x: 30,
-              scale: 0.96,
-            }}
-            whileInView={{
-              opacity: 1,
-              x: 0,
-              scale: 1,
-            }}
-            viewport={{
-              once: true,
-              amount: 0.2,
-            }}
-            transition={{
-              duration: 0.8,
-              ease: "easeOut" as const,
-            }}
-            className="relative flex min-h-[380px] items-center justify-center overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-950/40"
-          >
-            <Hero3D />
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>
