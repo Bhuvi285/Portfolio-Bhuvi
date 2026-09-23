@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Calendar, GraduationCap } from "lucide-react";
+import { GraduationCap, MapPin, CalendarDays } from "lucide-react";
 
 const education = [
   {
@@ -36,102 +36,237 @@ const cardVariants = {
 
 export default function Education() {
   return (
-    <section id="education" className="px-6 py-24">
+    <section
+      id="education"
+      className="px-6 py-24"
+    >
       <div className="mx-auto max-w-7xl">
-        {/* Section heading */}
+
+        {/* Section Heading */}
         <motion.div
-          initial={{ opacity: 0, y: 25 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
+          initial={{
+            opacity: 0,
+            y: 25,
+          }}
+          whileInView={{
+            opacity: 1,
+            y: 0,
+          }}
+          viewport={{
+            once: true,
+            amount: 0.3,
+          }}
           transition={{
             duration: 0.6,
             ease: "easeOut" as const,
           }}
-          className="mb-12"
         >
-          <p className="font-mono text-sm text-green-400">
+          <p className="font-mono text-sm text-[var(--accent)]">
             04 / EDUCATION
           </p>
 
-          <h2 className="mt-3 text-3xl font-bold text-white sm:text-4xl">
-            My academic journey.
+          <h2
+            className="
+              mt-3
+              text-3xl font-bold
+              text-[var(--foreground)]
+              sm:text-4xl
+            "
+          >
+            My education
           </h2>
 
-          <p className="mt-4 max-w-2xl text-zinc-500">
-            My educational background and the foundation behind my
-            development journey.
+          <p
+            className="
+              mt-4
+              max-w-2xl
+              leading-7
+              text-[var(--muted)]
+            "
+          >
+            My academic journey and the foundation that has shaped
+            my approach to software development.
           </p>
         </motion.div>
 
-        {/* Education timeline */}
-        <div className="relative">
-          {/* Timeline line */}
-          <div className="absolute left-5 top-0 hidden h-full w-px bg-zinc-800 sm:block" />
+        {/* Education Cards */}
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{
+            once: true,
+            amount: 0.2,
+          }}
+          transition={{
+            staggerChildren: 0.15,
+          }}
+          className="
+            mt-12
+            grid
+            gap-5
+            lg:grid-cols-2
+          "
+        >
+          {education.map((item) => (
+            <motion.article
+              key={item.degree}
+              variants={cardVariants}
+              transition={{
+                duration: 0.5,
+                ease: "easeOut" as const,
+              }}
+              className="
+                group
+                rounded-xl
+                border border-[var(--border)]
+                bg-[var(--card)]
+                p-6
 
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ staggerChildren: 0.2 }}
-            className="space-y-10"
-          >
-            {education.map((item) => (
-              <motion.div
-                key={`${item.institution}-${item.degree}`}
-                variants={cardVariants}
-                transition={{
-                  duration: 0.5,
-                  ease: "easeOut" as const,
-                }}
-                className="relative sm:pl-14"
-              >
-                {/* Timeline icon */}
-                <div className="absolute left-0 top-0 hidden h-10 w-10 items-center justify-center rounded-full border border-zinc-800 bg-zinc-950 sm:flex">
+                transition-all
+                duration-300
+                ease-out
+
+                hover:-translate-y-1
+                hover:border-[var(--accent)]
+                hover:bg-[var(--card-secondary)]
+                hover:shadow-lg
+                hover:shadow-black/10
+              "
+            >
+              {/* Top */}
+              <div className="flex items-start gap-4">
+
+                {/* Icon */}
+                <div
+                  className="
+                    flex h-11 w-11 shrink-0
+                    items-center justify-center
+                    rounded-lg
+                    border border-[var(--border)]
+                    bg-[var(--card-secondary)]
+                    transition-all duration-300
+                    group-hover:border-[var(--accent)]
+                  "
+                >
                   <GraduationCap
-                    size={18}
-                    className="text-green-400"
+                    size={21}
+                    className="
+                      text-[var(--accent)]
+                      transition-transform
+                      duration-300
+                      group-hover:scale-110
+                    "
                   />
                 </div>
 
-                {/* Education card */}
-                <div className="rounded-xl border border-zinc-800 bg-zinc-950 p-6 transition-colors hover:border-zinc-700">
-                  <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-                    <div>
-                      <h3 className="text-xl font-semibold text-white">
-                        {item.degree}
-                      </h3>
+                {/* Degree */}
+                <div>
+                  <h3
+                    className="
+                      text-lg
+                      font-semibold
+                      text-[var(--foreground)]
+                      transition-colors duration-300
+                      group-hover:text-[var(--accent)]
+                    "
+                  >
+                    {item.degree}
+                  </h3>
 
-                      <p className="mt-1 text-green-400">
-                        {item.institution}
-                      </p>
-
-                      <p className="mt-1 text-sm text-zinc-500">
-                        {item.location}
-                      </p>
-                    </div>
-
-                    <div className="flex flex-col gap-1 text-sm text-zinc-500 sm:items-end">
-                      <div className="flex items-center gap-2">
-                        <Calendar size={15} />
-                        {item.duration}
-                      </div>
-
-                      {item.result && (
-                        <span className="font-medium text-green-400">
-                          {item.result}
-                        </span>
-                      )}
-                    </div>
-                  </div>
-
-                  <p className="mt-5 leading-7 text-zinc-400">
-                    {item.description}
+                  <p
+                    className="
+                      mt-1
+                      text-sm
+                      font-medium
+                      text-[var(--muted)]
+                    "
+                  >
+                    {item.institution}
                   </p>
                 </div>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
+              </div>
+
+              {/* Metadata */}
+              <div
+                className="
+                  mt-6
+                  flex
+                  flex-wrap
+                  gap-4
+                  border-y
+                  border-[var(--border)]
+                  py-4
+                "
+              >
+                <div className="flex items-center gap-2">
+                  <CalendarDays
+                    size={15}
+                    className="text-[var(--accent)]"
+                  />
+
+                  <span
+                    className="
+                      text-sm
+                      text-[var(--muted)]
+                    "
+                  >
+                    {item.duration}
+                  </span>
+                </div>
+
+                <div className="flex items-center gap-2">
+                  <MapPin
+                    size={15}
+                    className="text-[var(--accent)]"
+                  />
+
+                  <span
+                    className="
+                      text-sm
+                      text-[var(--muted)]
+                    "
+                  >
+                    {item.location}
+                  </span>
+                </div>
+              </div>
+
+              {/* Description */}
+              <p
+                className="
+                  mt-5
+                  text-sm
+                  leading-7
+                  text-[var(--muted)]
+                  transition-colors duration-300
+                  group-hover:text-[var(--foreground)]
+                "
+              >
+                {item.description}
+              </p>
+
+              {/* Result */}
+              {item.result && (
+                <div className="mt-5">
+                  <span
+                    className="
+                      inline-flex
+                      rounded-md
+                      border border-[var(--border)]
+                      bg-[var(--card-secondary)]
+                      px-3 py-1.5
+                      text-sm
+                      font-medium
+                      text-[var(--accent)]
+                    "
+                  >
+                    {item.result}
+                  </span>
+                </div>
+              )}
+            </motion.article>
+          ))}
+        </motion.div>
       </div>
     </section>
   );
