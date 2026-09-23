@@ -16,7 +16,12 @@ export default function ThemeToggle() {
     return (
       <button
         type="button"
-        className="h-9 w-9 rounded-lg border border-zinc-800"
+        className="
+          flex h-9 w-9 items-center justify-center
+          rounded-lg
+          border border-[var(--border)]
+          bg-[var(--card)]
+        "
         aria-label="Toggle theme"
       />
     );
@@ -28,11 +33,7 @@ export default function ThemeToggle() {
     <button
       type="button"
       onClick={() => setTheme(isDark ? "light" : "dark")}
-      aria-label={
-        isDark
-          ? "Switch to light mode"
-          : "Switch to dark mode"
-      }
+      aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
       className="
         flex h-9 w-9 items-center justify-center
         rounded-lg
@@ -45,11 +46,7 @@ export default function ThemeToggle() {
         hover:text-[var(--accent)]
       "
     >
-      {isDark ? (
-        <Sun size={17} />
-      ) : (
-        <Moon size={17} />
-      )}
+      {isDark ? <Sun size={17} /> : <Moon size={17} />}
     </button>
   );
 }
