@@ -526,14 +526,36 @@ export default function Home() {
                   "
                 />
 
-                <Image
-                  src="/portfolio-hero.png"
-                  alt="Bhuvanesh - Full Stack Java Developer"
-                  fill
-                  priority
-                  sizes="(max-width: 768px) 80vw, 450px"
-                  className="relative object-cover object-center"
-                />
+
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.96, y: 10 }}
+                  animate={{
+                    opacity: 1,
+                    scale: 1,
+                    y: [0, -4, 0],
+                  }}
+                  transition={{
+                    opacity: { duration: 0.6 },
+                    scale: { duration: 0.6 },
+                    y: {
+                      duration: 4,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                    },
+                  }}
+                  whileHover={{
+                    scale: 1.02,
+                  }}
+                >
+                  <Image
+                    src="/portfolio-hero.png"
+                    alt="Bhuvanesh - Full Stack Java Developer"
+                    fill
+                    priority
+                    sizes="(max-width: 768px) 80vw, 450px"
+                    className="relative object-cover object-center"
+                  />
+                </motion.div>
 
                 {/* Image fade into editor */}
                 <div
