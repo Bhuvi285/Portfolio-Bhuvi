@@ -218,7 +218,7 @@ export default function NetworkBackground() {
       </div>
 
       {/* Subtle dark overlay for readability */}
-      <div className="absolute inset-0 bg-black/5 dark:bg-black/20" />
+      <div className="absolute inset-0 bg-black/5 dark:bg-black/10" />
     </div>
   );
 }
