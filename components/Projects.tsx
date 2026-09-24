@@ -139,10 +139,7 @@ const cardVariants = {
 
 export default function Projects() {
   return (
-    <section
-      id="projects"
-      className="px-6 py-24"
-    >
+    <section id="projects" className="px-6 pt-10 pb-24">
       <div className="mx-auto max-w-7xl">
 
         {/* Section Heading */}

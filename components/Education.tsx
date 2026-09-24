@@ -36,10 +36,7 @@ const cardVariants = {
 
 export default function Education() {
   return (
-    <section
-      id="education"
-      className="px-6 py-24"
-    >
+    <section id="education" className="px-6 pt-10 pb-24">
       <div className="mx-auto max-w-7xl">
 
         {/* Section Heading */}
