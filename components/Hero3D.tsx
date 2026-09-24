@@ -83,24 +83,29 @@ function TechBadge({
 
   return (
     <group ref={badgeRef} position={position}>
+      {/* Badge outer body */}
       <mesh castShadow>
         <boxGeometry args={[1.05, 0.42, 0.12]} />
+
         <meshStandardMaterial
-          color="#18181b"
+          color="#25292e"
           roughness={0.25}
-          metalness={0.65}
+          metalness={0.55}
         />
       </mesh>
 
+      {/* Badge inner surface */}
       <mesh position={[0, 0, 0.065]}>
         <boxGeometry args={[0.92, 0.3, 0.015]} />
+
         <meshStandardMaterial
-          color="#09090b"
+          color="#171a1e"
           roughness={0.35}
-          metalness={0.3}
+          metalness={0.25}
         />
       </mesh>
 
+      {/* Badge text */}
       <Text
         position={[0, 0, 0.085]}
         fontSize={0.13}
@@ -111,8 +116,10 @@ function TechBadge({
         {name}
       </Text>
 
+      {/* Accent line */}
       <mesh position={[0, -0.14, 0.085]}>
         <boxGeometry args={[0.45, 0.015, 0.01]} />
+
         <meshBasicMaterial
           color={color}
           transparent
@@ -155,33 +162,36 @@ function CodeEditor() {
         ref={groupRef}
         rotation={[0.05, -0.15, 0]}
       >
-        {/* Main editor body */}
+        {/* Main editor frame */}
         <mesh castShadow>
           <boxGeometry args={[3.8, 2.8, 0.22]} />
+
           <meshStandardMaterial
-            color="#111113"
+            color="#202328"
             roughness={0.3}
-            metalness={0.65}
+            metalness={0.55}
           />
         </mesh>
 
-        {/* Screen */}
+        {/* Editor screen */}
         <mesh position={[0, 0, 0.125]}>
           <boxGeometry args={[3.55, 2.45, 0.025]} />
+
           <meshStandardMaterial
-            color="#09090b"
+            color="#15181b"
             roughness={0.4}
             metalness={0.15}
           />
         </mesh>
 
-        {/* Top bar */}
+        {/* Editor header */}
         <mesh position={[0, 1.2, 0.15]}>
           <boxGeometry args={[3.7, 0.35, 0.05]} />
+
           <meshStandardMaterial
-            color="#27272a"
+            color="#34383d"
             roughness={0.25}
-            metalness={0.5}
+            metalness={0.45}
           />
         </mesh>
 
@@ -192,17 +202,19 @@ function CodeEditor() {
             position={[x, 1.2, 0.18]}
           >
             <sphereGeometry args={[0.07, 16, 16]} />
+
             <meshStandardMaterial
-              color="#3f3f46"
+              color="#5a6067"
               roughness={0.25}
-              metalness={0.5}
+              metalness={0.45}
             />
           </mesh>
         ))}
 
-        {/* Green status light */}
+        {/* Active window indicator */}
         <mesh position={[1.55, 1.2, 0.18]}>
           <sphereGeometry args={[0.045, 16, 16]} />
+
           <meshStandardMaterial
             color="#4ade80"
             emissive="#22c55e"
@@ -232,6 +244,7 @@ function CodeEditor() {
         {/* Bottom accent */}
         <mesh position={[0, -1.39, 0.03]}>
           <boxGeometry args={[1.1, 0.025, 0.025]} />
+
           <meshBasicMaterial
             color="#4ade80"
             transparent
@@ -266,10 +279,11 @@ function FloatingPlatform() {
       receiveShadow
     >
       <boxGeometry args={[4.8, 0.12, 2.2]} />
+
       <meshStandardMaterial
-        color="#0f0f11"
+        color="#1d2024"
         roughness={0.35}
-        metalness={0.55}
+        metalness={0.5}
       />
     </mesh>
   );
@@ -285,14 +299,16 @@ export default function Hero3D() {
         }}
         shadows
       >
-        <ambientLight intensity={0.5} />
+        {/* General lighting */}
+        <ambientLight intensity={0.7} />
 
         <directionalLight
           position={[3, 4, 5]}
-          intensity={2}
+          intensity={2.2}
           castShadow
         />
 
+        {/* Green accent lighting */}
         <pointLight
           position={[0, 0, 2]}
           color="#22c55e"
@@ -309,8 +325,10 @@ export default function Hero3D() {
 
         <Environment preset="city" />
 
+        {/* Main 3D editor */}
         <CodeEditor />
 
+        {/* Technology badges */}
         {technologies.map((technology) => (
           <TechBadge
             key={technology.name}
@@ -320,6 +338,7 @@ export default function Hero3D() {
           />
         ))}
 
+        {/* Floating base */}
         <FloatingPlatform />
       </Canvas>
     </div>
