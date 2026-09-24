@@ -172,7 +172,7 @@ export default function InteractiveBackground() {
             d={path}
             fill="none"
             stroke="#4ade80"
-            strokeWidth="5"
+            strokeWidth="7"
             strokeLinecap="round"
             opacity="0.10"
             filter="url(#cursorTrailGlow)"
@@ -183,7 +183,7 @@ export default function InteractiveBackground() {
             d={path}
             fill="none"
             stroke="url(#cursorTrailGradient)"
-            strokeWidth="1.5"
+            strokeWidth="3.5"
             strokeLinecap="round"
           />
         </>
