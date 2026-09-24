@@ -160,25 +160,23 @@ export default function Home() {
             <a
               href="#projects"
               className="
-                inline-flex
-                items-center
-                gap-2
-                rounded-lg
-                bg-[var(--accent)]
-                px-5
-                py-3
-                text-sm
-                font-semibold
-                text-white
-
-                transition-all
-                duration-300
-
-                hover:-translate-y-0.5
-                hover:brightness-110
-                hover:shadow-lg
-                hover:shadow-black/10
-              "
+  inline-flex
+  items-center
+  gap-2
+  rounded-lg
+  bg-[#480EAD]
+  px-5
+  py-3
+  text-sm
+  font-semibold
+  text-white
+  transition-all
+  duration-300
+  hover:-translate-y-0.5
+  hover:bg-[#22C55E]
+  hover:shadow-lg
+  hover:shadow-green-900/20
+"
             >
               View Projects
               <ArrowRight size={17} />
