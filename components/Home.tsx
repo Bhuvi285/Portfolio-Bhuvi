@@ -528,23 +528,33 @@ export default function Home() {
 
 
                 <motion.div
-                  initial={{ opacity: 0, scale: 0.96, y: 10 }}
+                  initial={{
+                    opacity: 0,
+                    scale: 0.97,
+                    y: 12,
+                  }}
                   animate={{
                     opacity: 1,
                     scale: 1,
-                    y: [0, -4, 0],
+                    y: [0, -3, 0],
                   }}
                   transition={{
-                    opacity: { duration: 0.6 },
-                    scale: { duration: 0.6 },
+                    opacity: {
+                      duration: 0.7,
+                      ease: "easeOut",
+                    },
+                    scale: {
+                      duration: 0.7,
+                      ease: "easeOut",
+                    },
                     y: {
-                      duration: 4,
+                      duration: 5,
                       repeat: Infinity,
                       ease: "easeInOut",
                     },
                   }}
                   whileHover={{
-                    scale: 1.02,
+                    scale: 1.015,
                   }}
                 >
                   <Image
