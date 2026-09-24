@@ -136,13 +136,13 @@ export default function InteractiveBackground() {
           <stop
             offset="70%"
             stopColor="#4ade80"
-            stopOpacity="0.12"
+            stopOpacity="0.08"
           />
 
           <stop
             offset="100%"
             stopColor="#4ade80"
-            stopOpacity="0.75"
+            stopOpacity="0.45"
           />
         </linearGradient>
 
