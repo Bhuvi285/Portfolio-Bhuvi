@@ -165,10 +165,10 @@ function NetworkScene() {
   /*
    * Slightly reduce the background on smaller screens.
    */
-  const scale = Math.min(size.width / 1200, 1);
+ const scale = Math.min(size.width / 1000, 1.15);
 
-  return (
-    <group scale={Math.max(scale, 0.7)}>
+return (
+  <group scale={Math.max(scale, 0.85)}>
       {/* Connecting lines */}
       <lineSegments ref={linesRef} geometry={lineGeometry}>
         <lineBasicMaterial
