@@ -1,6 +1,6 @@
 import Navbar from "@/components/Navbar";
 import NetworkBackground from "@/components/NetworkBackground";
-
+import InteractiveBackground from "@/components/InteractiveBackground";
 import Home from "@/components/Home";
 import About from "@/components/About";
 import Skills from "@/components/Skills";
@@ -19,6 +19,7 @@ export default function Page() {
       <Navbar />
 
       <NetworkBackground />
+      <InteractiveBackground />
 
       <main className="relative z-10">
         <Home />
