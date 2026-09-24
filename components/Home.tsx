@@ -526,18 +526,9 @@ export default function Home() {
                   "
                 />
 
-
                 <motion.div
-                  initial={{
-                    opacity: 0,
-                    scale: 0.97,
-                    y: 12,
-                  }}
-                  animate={{
-                    opacity: 1,
-                    scale: 1,
-                    y: [0, -3, 0],
-                  }}
+                  initial={{ opacity: 0, scale: 0.97, y: 12 }}
+                  animate={{ opacity: 1, scale: 1, y: [0, -3, 0] }}
                   transition={{
                     opacity: {
                       duration: 0.7,
@@ -553,9 +544,8 @@ export default function Home() {
                       ease: "easeInOut",
                     },
                   }}
-                  whileHover={{
-                    scale: 1.015,
-                  }}
+                  whileHover={{ scale: 1.015 }}
+                  className="absolute inset-0"
                 >
                   <Image
                     src="/portfolio-hero.png"
@@ -563,7 +553,7 @@ export default function Home() {
                     fill
                     priority
                     sizes="(max-width: 768px) 80vw, 450px"
-                    className="relative object-cover object-center"
+                    className="object-cover object-center"
                   />
                 </motion.div>
 
