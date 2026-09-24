@@ -40,7 +40,3 @@ body {
   color: var(--foreground);
   transition: background-color 300ms ease, color 300ms ease;
 }
-
-section {
-  scroll-margin-top: 80px;
-}
