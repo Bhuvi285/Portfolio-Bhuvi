@@ -164,7 +164,7 @@ export default function Home() {
   items-center
   gap-2
   rounded-lg
-  bg-[#480EAD]
+  bg-[#4ADE80]
   px-5
   py-3
   text-sm
