@@ -136,13 +136,13 @@ export default function InteractiveBackground() {
           <stop
             offset="70%"
             stopColor="#4ade80"
-            stopOpacity="0.08"
+            stopOpacity="0.18"
           />
 
           <stop
             offset="100%"
             stopColor="#4ade80"
-            stopOpacity="0.45"
+            stopOpacity="0.90"
           />
         </linearGradient>
 
@@ -172,9 +172,9 @@ export default function InteractiveBackground() {
             d={path}
             fill="none"
             stroke="#4ade80"
-            strokeWidth="4"
+            strokeWidth="5"
             strokeLinecap="round"
-            opacity="0.04"
+            opacity="0.10"
             filter="url(#cursorTrailGlow)"
           />
 
@@ -183,7 +183,7 @@ export default function InteractiveBackground() {
             d={path}
             fill="none"
             stroke="url(#cursorTrailGradient)"
-            strokeWidth="1"
+            strokeWidth="1.5"
             strokeLinecap="round"
           />
         </>
