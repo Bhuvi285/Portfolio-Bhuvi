@@ -17,7 +17,24 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Bhuvanesh | Full Stack Java Developer",
   description:
-    "Portfolio of Bhuvanesh, a Full Stack Java Developer.",
+    "Portfolio of Bhuvanesh, a Full Stack Java Developer building modern web applications with Java, Spring Boot, React, Next.js and modern web technologies.",
+  keywords: [
+    "Bhuvanesh",
+    "Full Stack Java Developer",
+    "Java Developer",
+    "Spring Boot Developer",
+    "React Developer",
+    "Next.js Developer",
+    "Computer Engineering",
+    "Web Developer Portfolio",
+  ],
+  authors: [
+    {
+      name: "Bhuvanesh",
+    },
+  ],
+  creator: "Bhuvanesh",
+  metadataBase: new URL("https://your-domain.com"),
 };
 
 export default function RootLayout({
