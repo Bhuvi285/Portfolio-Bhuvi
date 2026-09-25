@@ -34,6 +34,14 @@ export const metadata: Metadata = {
     },
   ],
   creator: "Bhuvanesh",
+
+  openGraph: {
+    title: "Bhuvanesh | Full Stack Java Developer",
+    description:
+      "Portfolio of Bhuvanesh, a Full Stack Java Developer building modern web applications with Java, Spring Boot, React and Next.js.",
+    type: "website",
+    locale: "en_US",
+  },
 };
 
 export default function RootLayout({
