@@ -34,7 +34,6 @@ export const metadata: Metadata = {
     },
   ],
   creator: "Bhuvanesh",
-  metadataBase: new URL("https://your-domain.com"),
 };
 
 export default function RootLayout({
