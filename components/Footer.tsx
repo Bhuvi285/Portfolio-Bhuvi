@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import {
   ArrowUp,
   Code2,
@@ -38,6 +37,8 @@ export default function Footer() {
   return (
     <footer
       className="
+        relative
+        z-20
         border-t
         border-[var(--border)]
         bg-[var(--card)]
@@ -50,23 +51,7 @@ export default function Footer() {
       <div className="mx-auto max-w-7xl">
 
         {/* Main Footer */}
-        <motion.div
-          initial={{
-            opacity: 0,
-            y: 20,
-          }}
-          whileInView={{
-            opacity: 1,
-            y: 0,
-          }}
-          viewport={{
-            once: true,
-            amount: 0.2,
-          }}
-          transition={{
-            duration: 0.6,
-            ease: "easeOut" as const,
-          }}
+        <div
           className="
             flex
             flex-col
@@ -137,10 +122,8 @@ export default function Footer() {
                     border border-[var(--border)]
                     bg-[var(--card-secondary)]
                     text-[var(--muted)]
-
                     transition-all
                     duration-300
-
                     hover:-translate-y-0.5
                     hover:border-[var(--accent)]
                     hover:text-[var(--accent)]
@@ -164,10 +147,8 @@ export default function Footer() {
                 border border-[var(--border)]
                 bg-[var(--card-secondary)]
                 text-[var(--muted)]
-
                 transition-all
                 duration-300
-
                 hover:-translate-y-0.5
                 hover:border-[var(--accent)]
                 hover:text-[var(--accent)]
@@ -176,7 +157,7 @@ export default function Footer() {
               <ArrowUp size={17} />
             </button>
           </div>
-        </motion.div>
+        </div>
 
         {/* Bottom */}
         <div
@@ -193,12 +174,7 @@ export default function Footer() {
             sm:justify-between
           "
         >
-          <p
-            className="
-              text-xs
-              text-[var(--muted-light)]
-            "
-          >
+          <p className="text-xs text-[var(--muted-light)]">
             © {new Date().getFullYear()} Bhuvanesh. All rights
             reserved.
           </p>
