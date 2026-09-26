@@ -15,6 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://bhuvi285.github.io"),
   title: "Bhuvanesh | Full Stack Java Developer",
   description:
     "Portfolio of Bhuvanesh, a Full Stack Java Developer building modern web applications with Java, Spring Boot, React, Next.js and modern web technologies.",
