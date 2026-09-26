@@ -16,11 +16,15 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://bhuvi285.github.io"),
-  title: "Bhuvanesh | Full Stack Java Developer",
+
+  title: "Bhuvanesh Neve | Full Stack Java Developer",
+
   description:
-    "Portfolio of Bhuvanesh, a Full Stack Java Developer building modern web applications with Java, Spring Boot, React, Next.js and modern web technologies.",
+    "Portfolio of Bhuvanesh Neve, a Computer Engineering student and Full Stack Java Developer building modern web applications with Java, Spring Boot, React, Next.js and modern web technologies.",
+
   keywords: [
-    "Bhuvanesh",
+    "Bhuvanesh Neve",
+    "Bhuvanesh Neve Portfolio",
     "Full Stack Java Developer",
     "Java Developer",
     "Spring Boot Developer",
@@ -29,17 +33,25 @@ export const metadata: Metadata = {
     "Computer Engineering",
     "Web Developer Portfolio",
   ],
+
   authors: [
     {
-      name: "Bhuvanesh",
+      name: "Bhuvanesh Neve",
     },
   ],
-  creator: "Bhuvanesh",
+
+  creator: "Bhuvanesh Neve",
+
+  verification: {
+    google: "M7DhokN5B2kbOoiCmATbANZg2sQwhor4rkHp8NBEoqk",
+  },
 
   openGraph: {
-    title: "Bhuvanesh | Full Stack Java Developer",
+    title: "Bhuvanesh Neve | Full Stack Java Developer",
+
     description:
-      "Portfolio of Bhuvanesh, a Full Stack Java Developer building modern web applications with Java, Spring Boot, React and Next.js.",
+      "Portfolio of Bhuvanesh Neve, a Computer Engineering student and Full Stack Java Developer building modern web applications with Java, Spring Boot, React and Next.js.",
+
     type: "website",
     locale: "en_US",
   },
