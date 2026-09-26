@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://bhuvi285.github.io"),
+  metadataBase: new URL("https://portfolio-bhuvi-one.vercel.app"),
 
   title: "Bhuvanesh Neve | Full Stack Java Developer",
 
@@ -48,12 +48,11 @@ export const metadata: Metadata = {
 
   openGraph: {
     title: "Bhuvanesh Neve | Full Stack Java Developer",
-
     description:
       "Portfolio of Bhuvanesh Neve, a Computer Engineering student and Full Stack Java Developer building modern web applications with Java, Spring Boot, React and Next.js.",
-
     type: "website",
     locale: "en_US",
+    url: "https://portfolio-bhuvi-one.vercel.app",
   },
 };
 
