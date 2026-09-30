@@ -132,7 +132,7 @@ export default function Home() {
               sm:text-3xl
             "
           >
-            Full Stack Java Developer.
+            Full Stack Developer.
           </motion.h2>
 
           {/* Description */}

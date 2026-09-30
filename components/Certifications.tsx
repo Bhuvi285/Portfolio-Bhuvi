@@ -9,31 +9,42 @@ import {
 
 const certifications = [
   {
-    id: "certification-2026",
-    title: "Certification Name",
-    organization: "Issuing Organization",
-    date: "2026",
-    description:
-      "Briefly describe what this certification covered or what you learned.",
-    credentialUrl: "https://example.com",
-  },
-  {
-    id: "certification-2025-skills",
-    title: "Certification Name",
-    organization: "Issuing Organization",
+    id: "react-cohort-2025",
+    title: "The React Cohort",
+    organization: "R. C. Patel Institute of Technology, Shirpur",
     date: "2025",
     description:
-      "Briefly describe the skills or technologies covered by this certification.",
-    credentialUrl: "https://example.com",
+      "Completed a 4-day Frontend Development Workshop covering JavaScript, TypeScript, ReactJS, Tailwind CSS, and Deployment.",
+    certificateUrl: "/certificates/react-cohort-2025.pdf",
   },
+
   {
-    id: "certification-2025-knowledge",
-    title: "Certification Name",
-    organization: "Issuing Organization",
+    id: "nodevember-2025",
+    title: "Nodevember 3.0",
+    organization: "R. C. Patel Institute of Technology, Shirpur",
     date: "2025",
     description:
-      "Briefly describe the knowledge or skills demonstrated through this certification.",
-    credentialUrl: "",
+      "Completed a 5-day Backend Development Workshop covering Node.js, Express.js, MongoDB, RESTful APIs, AI integration, and Deployment.",
+    certificateUrl: "/certificates/nodevember-2025.pdf",
+  },
+  {
+    id: "sql-bootcamp-2024",
+    title: "The Ultimate SQL Bootcamp: Go From Zero to Hero",
+    organization: "Udemy — Sara Academy",
+    date: "2024",
+    description:
+      "Completed a SQL bootcamp covering foundational and practical SQL concepts.",
+    certificateUrl: "/certificates/sql-bootcamp-2024.pdf",
+  },
+
+  {
+    id: "html-css-2024",
+    title: "Learn HTML and CSS from Beginning to Advanced",
+    organization: "Udemy — Marcus Menti, Zechariah Tech",
+    date: "2024",
+    description:
+      "Completed a course covering HTML and CSS from beginner concepts through advanced topics.",
+    certificateUrl: "/certificates/html-css-2024.pdf",
   },
 ];
 
@@ -121,8 +132,11 @@ export default function Certifications() {
           "
         >
           {certifications.map((certification) => (
-            <motion.article
+            <motion.a
               key={certification.id}
+              href={certification.certificateUrl}
+              target="_blank"
+              rel="noopener noreferrer"
               variants={cardVariants}
               transition={{
                 duration: 0.5,
@@ -146,8 +160,11 @@ export default function Certifications() {
                 hover:bg-[var(--card-secondary)]
                 hover:shadow-lg
                 hover:shadow-black/10
+
+                cursor-pointer
               "
             >
+
               {/* Header */}
               <div className="flex items-start justify-between gap-4">
 
@@ -191,6 +208,7 @@ export default function Certifications() {
 
               {/* Certification Information */}
               <div className="mt-5 flex-1">
+
                 <h3
                   className="
                     text-lg
@@ -228,44 +246,41 @@ export default function Certifications() {
                 </p>
               </div>
 
-              {/* Credential Link */}
-              {certification.credentialUrl && (
-                <div
+              {/* View Certificate */}
+              <div
+                className="
+                  mt-6
+                  border-t
+                  border-[var(--border)]
+                  pt-5
+                "
+              >
+                <span
                   className="
-                    mt-6
-                    border-t
-                    border-[var(--border)]
-                    pt-5
+                    inline-flex
+                    items-center
+                    gap-2
+                    text-sm
+                    font-medium
+                    text-[var(--muted)]
+                    transition-colors
+                    duration-300
+                    group-hover:text-[var(--accent)]
                   "
                 >
-                  <a
-                    href={certification.credentialUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                  View certificate
+
+                  <ArrowUpRight
+                    size={16}
                     className="
-                      inline-flex
-                      items-center
-                      gap-2
-                      text-sm
-                      font-medium
-                      text-[var(--muted)]
-                      transition-colors duration-300
-                      hover:text-[var(--accent)]
+                      transition-transform
+                      duration-300
+                      group-hover:translate-x-0.5
+                      group-hover:-translate-y-0.5
                     "
-                  >
-                    View credential
-                    <ArrowUpRight
-                      size={16}
-                      className="
-                        transition-transform
-                        duration-300
-                        group-hover:translate-x-0.5
-                        group-hover:-translate-y-0.5
-                      "
-                    />
-                  </a>
-                </div>
-              )}
+                  />
+                </span>
+              </div>
 
               {/* Small visual indicator */}
               <ExternalLink
@@ -281,7 +296,8 @@ export default function Certifications() {
                   group-hover:opacity-100
                 "
               />
-            </motion.article>
+
+            </motion.a>
           ))}
         </motion.div>
       </div>
